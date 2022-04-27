@@ -1,19 +1,33 @@
+const fs = require('fs');
 const dotenv = require('dotenv');
 const {
   createUpvoteTriggers,
   createProductRequestTriggers,
   createCommentTriggers,
-} = require('./triggers');
-const {
-  demoUsers,
-  demoProductRequests,
-  demoUpvotes,
-  demoComments,
-} = require('./testData');
+} = require('../database/triggers');
+
+const accounts = JSON.parse(
+  fs.readFileSync(`${__dirname}/accounts.json`, 'utf-8')
+);
+const pws = JSON.parse(
+  fs.readFileSync(`${__dirname}/testDataPWs.json`, 'utf-8')
+);
+const productRequests = JSON.parse(
+  fs.readFileSync(`${__dirname}/productRequests.json`, 'utf-8')
+);
+const comments = JSON.parse(
+  fs.readFileSync(`${__dirname}/comments.json`, 'utf-8')
+);
+
+accounts.forEach((el) => {
+  el.password = pws[el.username];
+  el.passwordConfirm = pws[el.username];
+});
+
 dotenv.config({ path: './config.env' });
 
-const sequelize = require('./sequelize');
-require('./associations');
+const sequelize = require('../database/sequelize');
+require('../database/associations');
 
 sequelize
   .authenticate()
@@ -24,30 +38,30 @@ sequelize
     console.log('ERROR connecting to DB: ', err);
   });
 
-const { Account, Product, ProductRequest, Upvote, Comment } = sequelize.models;
+const { Account, Product, ProductRequest, Comment } = sequelize.models;
 
 async function insertData() {
   await Product.create({ name: 'website' });
 
-  await Account.bulkCreate(demoUsers, {
+  await Account.bulkCreate(accounts, {
     individualHooks: true,
     validate: true,
   });
 
-  await Account.update({
-    activationToken: null,
-    activationExpires: null,
-  });
+  await Account.update(
+    { activationToken: null, activationExpires: null },
+    { where: { active: true } }
+  );
 
-  await ProductRequest.bulkCreate(demoProductRequests, {
+  await ProductRequest.bulkCreate(productRequests, {
     validate: true,
   });
 
-  await Upvote.bulkCreate(demoUpvotes);
+  // await Upvote.bulkCreate(demoUpvotes);
 
-  await Comment.bulkCreate(demoComments);
+  await Comment.bulkCreate(comments);
 
-  console.log('Successfully inserted demo data');
+  console.log('Successfully inserted test data');
 }
 
 async function syncDB(options = {}) {
@@ -59,7 +73,7 @@ async function syncDB(options = {}) {
     await createProductRequestTriggers(sequelize);
     await createCommentTriggers(sequelize);
 
-    console.log('Inserting demo data........');
+    console.log('Inserting test data........');
     await insertData();
   } catch (err) {
     console.log('There was an error syncing models: ', err);

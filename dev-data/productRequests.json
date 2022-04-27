@@ -1,0 +1,110 @@
+[
+  {
+    "productId": 1,
+    "title": "Add tags for solutions",
+    "category": "enhancement",
+    "upvotes": 112,
+    "status": "suggestion",
+    "description": "Easier to search for solutions based on a specific stack.",
+    "accountUid": "cbcdad5d-2839-4723-ad76-969c8128c3ec"
+  },
+  {
+    "productId": 1,
+    "title": "Add a dark theme option",
+    "category": "feature",
+    "upvotes": 99,
+    "status": "suggestion",
+    "description": "It would help people with light sensitivities and who prefer dark mode.",
+    "accountUid": "442fa3de-55d6-4f5a-bb37-b0cc8757a466"
+  },
+  {
+    "productId": 1,
+    "title": "Q&A within the challenge hubs",
+    "category": "feature",
+    "upvotes": 65,
+    "status": "suggestion",
+    "description": "Challenge-specific Q&A would make for easy reference.",
+    "accountUid": "456cb95e-9093-46ee-a8bf-1412f78ddf3c"
+  },
+  {
+    "productId": 1,
+    "title": "Add image/video upload to feedback",
+    "category": "enhancement",
+    "upvotes": 51,
+    "status": "suggestion",
+    "description": "Images and screencasts can enhance comments on solutions.",
+    "accountUid": "1f085735-8857-4443-931f-cb1cbf6f21fb"
+  },
+  {
+    "productId": 1,
+    "title": "Ability to follow others",
+    "category": "feature",
+    "upvotes": 42,
+    "status": "suggestion",
+    "description": "Stay updated on comments and solutions other people post.",
+    "accountUid": "fc053f3e-20ac-4ea7-841b-6cd59a793cfe"
+  },
+  {
+    "productId": 1,
+    "title": "Preview images not loading",
+    "category": "bug",
+    "upvotes": 3,
+    "status": "suggestion",
+    "description": "Challenge preview images are missing when you apply a filter.",
+    "accountUid": "586ad0fb-e11b-4e8b-a0e5-568c2e0293a2"
+  },
+  {
+    "productId": 1,
+    "title": "More comprehensive reports",
+    "category": "feature",
+    "upvotes": 123,
+    "status": "planned",
+    "description": "It would be great to see a more detailed breakdown of solutions.",
+    "accountUid": "2c06ca74-8650-4cfb-a1cd-8cc5f4fedeb5"
+  },
+  {
+    "productId": 1,
+    "title": "Learning paths",
+    "category": "feature",
+    "upvotes": 28,
+    "status": "planned",
+    "description": "Sequenced projects for different goals to help people improve.",
+    "accountUid": "b0892ac3-bcf7-4029-a37a-a16388ffd777"
+  },
+  {
+    "productId": 1,
+    "title": "One-click portfolio generation",
+    "category": "feature",
+    "upvotes": 62,
+    "status": "in-progress",
+    "description": "Add ability to create professional looking portfolio from profile.",
+    "accountUid": "2a69e064-5175-4216-9ec9-ef9642f2870c"
+  },
+  {
+    "productId": 1,
+    "title": "Bookmark challenges",
+    "category": "feature",
+    "upvotes": 31,
+    "status": "in-progress",
+    "description": "Be able to bookmark challenges to take later on.",
+    "accountUid": "ee1f68d3-f3e7-42c5-97a5-e22507a5e676"
+  },
+  {
+    "productId": 1,
+    "title": "Animated solution screenshots",
+    "category": "bug",
+    "upvotes": 9,
+    "status": "in-progress",
+    "description": "Screenshots of solutions with animations don't display correctly.",
+    "accountUid": "f87e90d3-1e27-4292-86c2-1439c4f5953e"
+  },
+  {
+    "productId": 1,
+    "title": "Add micro-interactions",
+    "category": "enhancement",
+    "upvotes": 71,
+    "status": "live",
+    "description": "Small animations at specific points can add delight.",
+    "accountUid": "eb47654a-84c2-418f-80ac-5aaee8e30339"
+  }
+]

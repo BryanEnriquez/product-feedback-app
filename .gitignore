@@ -1,6 +1,6 @@
 node_modules
 
-database/testData.js
+dev-data/testDataPWs.json
 
 # local configuration
 config.env

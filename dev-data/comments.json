@@ -1,0 +1,124 @@
+[
+  {
+    "productRequestId": 1,
+    "author": ["upbeat1811", "Suzanne Chang"],
+    "content": "Awesome idea! Trying to find framework-specific projects within the hubs can be tedious",
+    "accountUid": "442fa3de-55d6-4f5a-bb37-b0cc8757a466"
+  },
+  {
+    "productRequestId": 1,
+    "author": ["brawnybrave", "Thomas Hood"],
+    "content": "Please use fun, color-coded labels to easily identify them at a glance",
+    "accountUid": "456cb95e-9093-46ee-a8bf-1412f78ddf3c"
+  },
+  {
+    "productRequestId": 2,
+    "author": ["hexagon.bestagon", "Elijah Moss"],
+    "content": "Also, please allow styles to be applied based on system preferences. I would love to be able to browse Frontend Mentor in the evening after my device's dark mode turns on without the bright background it currently has.",
+    "accountUid": "1f085735-8857-4443-931f-cb1cbf6f21fb"
+  },
+  {
+    "productRequestId": 2,
+    "author": ["hummingbird1", "James Skinner"],
+    "content": "Second this! I do a lot of late night coding and reading. Adding a dark theme can be great for preventing eye strain and the headaches that result. It's also quite a trend with modern apps and  apparently saves battery life.",
+    "accountUid": "fc053f3e-20ac-4ea7-841b-6cd59a793cfe"
+  },
+  {
+    "productRequestId": 3,
+    "author": ["soccerviewer8", "George Partridge"],
+    "content": "Much easier to get answers from devs who can relate, since they've either finished the challenge themselves or are in the middle of it.",
+    "accountUid": "2a69e064-5175-4216-9ec9-ef9642f2870c"
+  },
+  {
+    "productRequestId": 4,
+    "author": ["warlikeduke", "Javier Pollard"],
+    "content": "Right now, there is no ability to add images while giving feedback which isn't ideal because I have to use another app to show what I mean",
+    "accountUid": "b0892ac3-bcf7-4029-a37a-a16388ffd777"
+  },
+  {
+    "productRequestId": 4,
+    "author": ["peppersprime32", "Roxanne Travis"],
+    "content": "Yes I'd like to see this as well. Sometimes I want to add a short video or gif to explain the site's behavior..",
+    "accountUid": "ee1f68d3-f3e7-42c5-97a5-e22507a5e676"
+  },
+  {
+    "productRequestId": 5,
+    "author": ["arlen_the_marlin", "Victoria Mejia"],
+    "content": "I also want to be notified when devs I follow submit projects on FEM. Is in-app notification also in the pipeline?",
+    "accountUid": "f87e90d3-1e27-4292-86c2-1439c4f5953e"
+  },
+  {
+    "productRequestId": 5,
+    "author": ["countryspirit", "Jackson Barker"],
+    "content": "I've been saving the profile URLs of a few people and I check what they've been doing from time to time. Being able to follow them solves that",
+    "accountUid": "eb47654a-84c2-418f-80ac-5aaee8e30339"
+  },
+  {
+    "productRequestId": 7,
+    "author": ["arlen_the_marlin", "Victoria Mejia"],
+    "content": "This would be awesome! It would be so helpful to see an overview of my code in a way that makes it easy to spot where things could be improved.",
+    "accountUid": "f87e90d3-1e27-4292-86c2-1439c4f5953e"
+  },
+  {
+    "productRequestId": 7,
+    "author": ["countryspirit", "Jackson Barker"],
+    "content": "Yeah, this would be really good. I'd love to see deeper insights into my code!",
+    "accountUid": "eb47654a-84c2-418f-80ac-5aaee8e30339"
+  },
+  {
+    "productRequestId": 8,
+    "author": ["soccerviewer8", "George Partridge"],
+    "content": "Having a path through the challenges that I could follow would be brilliant! Sometimes I'm not sure which challenge would be the best next step to take. So this would help me navigate through them!",
+    "accountUid": "2a69e064-5175-4216-9ec9-ef9642f2870c"
+  },
+  {
+    "productRequestId": 9,
+    "author": ["voyager.344", "Ryan Welles"],
+    "content": "I haven't built a portfolio site yet, so this would be really helpful. Might it also be possible to choose layout and colour themes?!",
+    "accountUid": "2c06ca74-8650-4cfb-a1cd-8cc5f4fedeb5"
+  },
+  {
+    "productRequestId": 10,
+    "author": ["upbeat1811", "Suzanne Chang"],
+    "content": "This would be great! At the moment, I'm just starting challenges in order to save them. But this means the My Challenges section is overflowing with projects and is hard to manage. Being able to bookmark challenges would be really helpful.",
+    "accountUid": "442fa3de-55d6-4f5a-bb37-b0cc8757a466"
+  },
+  {
+    "productRequestId": 12,
+    "author": ["arlen_the_marlin", "Victoria Mejia"],
+    "content": "I'd love to see this! It always makes me so happy to see little details like these on websites.",
+    "accountUid": "f87e90d3-1e27-4292-86c2-1439c4f5953e"
+  },
+  {
+    "productRequestId": 2,
+    "author": ["annev1990", "Anne Valentine"],
+    "content": "While waiting for dark mode, there are browser extensions that will also do the job. Search for 'dark theme' followed by your browser. There might be a need to turn off the extension for sites with naturally black backgrounds though",
+    "accountUid": "586ad0fb-e11b-4e8b-a0e5-568c2e0293a2",
+    "parentId": 4,
+    "depth": 1
+  },
+  {
+    "productRequestId": 2,
+    "author": ["voyager.344", "Ryan Welles"],
+    "content": "Good point! Using any kind of style extension is great and can be highly customizable, like the ability to change contrast and brightness. I'd prefer not to use one of such extensions, however, for security and privacy reasons.",
+    "accountUid": "2c06ca74-8650-4cfb-a1cd-8cc5f4fedeb5",
+    "parentId": 4,
+    "depth": 1
+  },
+  {
+    "productRequestId": 5,
+    "author": ["velvetround", "Zena Kelley"],
+    "content": "Bumping this. It would be good to have a tab with a feed of people I follow so it's easy to see what challenges they've done lately. I learn a lot by reading good developers' code.",
+    "accountUid": "cbcdad5d-2839-4723-ad76-969c8128c3ec",
+    "parentId": 8,
+    "depth": 1
+  },
+  {
+    "productRequestId": 12,
+    "author": ["upbeat1811", "Suzanne Chang"],
+    "content": "Me too! I'd also love to see celebrations at specific points as well. It would help people take a moment to celebrate their achievements!",
+    "accountUid": "442fa3de-55d6-4f5a-bb37-b0cc8757a466",
+    "parentId": 15,
+    "depth": 1
+  }
+]
