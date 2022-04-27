@@ -95,8 +95,8 @@ Account.init(
       allowNull: false,
       validate: {
         is: {
-          args: /^[a-z0-9.]{4,20}$/i,
-          msg: 'Username may only contain: [letters, numbers, .] and must be between 4-20 characters',
+          args: /^[a-z0-9._]{4,20}$/i,
+          msg: 'Username may only contain: [letters, numbers, ., _] and must be between 4-20 characters',
         },
         notNull: { msg: 'Please enter a username' },
       },

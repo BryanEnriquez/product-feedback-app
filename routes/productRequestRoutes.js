@@ -19,7 +19,7 @@ router
   .all(authController.protect)
   .post(
     productRequestController.setIds_User_Product,
-    productRequestController.createProductRequest // OK
+    productRequestController.createProductRequest
   );
 
 router.get(
@@ -31,9 +31,9 @@ router.get(
 
 router
   .route('/:id')
-  .get(productRequestController.getProductRequest) // OK
+  .get(productRequestController.getProductRequest)
   .all(authController.protect, authController.isCreatorOrAdmin)
-  .patch(productRequestController.updateProductRequest) // OK
-  .delete(productRequestController.deleteProductRequest); // OK
+  .patch(productRequestController.updateProductRequest)
+  .delete(productRequestController.deleteProductRequest);
 
 module.exports = router;
