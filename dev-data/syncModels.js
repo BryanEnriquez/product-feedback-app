@@ -73,8 +73,8 @@ async function syncDB(options = {}) {
     await createProductRequestTriggers(sequelize);
     await createCommentTriggers(sequelize);
 
-    console.log('Inserting test data........');
-    await insertData();
+    // console.log('Inserting test data........');
+    // await insertData();
   } catch (err) {
     console.log('There was an error syncing models: ', err);
   }
