@@ -185,7 +185,7 @@ const onCommentInsertFn = '' +
           'new.product_request_id = product_request_id AND deleted = false ' +
       ") THEN RAISE EXCEPTION 'Product request IDs do not match.'; " +
       'END IF; ' +
-      "new.reply_to := (SELECT author FROM comment WHERE new.parent_id = comment_id)::VARCHAR(32)[]; " +
+      "new.reply_to := (SELECT author[1] FROM comment WHERE new.parent_id = comment_id); " +
     'END IF; ' +
     'UPDATE product_request SET comments = comments + 1 ' +
       'WHERE new.product_request_id = product_request_id; ' +

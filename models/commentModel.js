@@ -34,8 +34,7 @@ Comment.init(
     },
     replyTo: {
       field: 'reply_to',
-      // Holds username, first+last names
-      type: DataTypes.ARRAY(DataTypes.STRING(32)),
+      type: DataTypes.STRING(20),
     },
     author: {
       type: DataTypes.ARRAY(DataTypes.STRING(32)),
