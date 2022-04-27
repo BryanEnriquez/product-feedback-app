@@ -1,0 +1,14 @@
+extends base
+
+block content
+  p Hi #{firstName},
+  p You can activate your account by clicking the link below (valid for 3 hours):
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href=`${url}`, target='_blank') Activate my account

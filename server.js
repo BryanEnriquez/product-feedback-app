@@ -8,23 +8,24 @@ process.on('uncaughtException', (err) => {
 
 dotenv.config({ path: './config.env' });
 
-// const sequelize = require('./config/sequelize');
+const sequelize = require('./database/sequelize.js');
+require('./database/associations');
 
-// sequelize
-//   .authenticate()
-//   .then(() => {
-//     console.log('Successfully connected to DB');
-//   })
-//   .catch((err) => {
-//     console.log('Could not connect to DB. Err: ', err);
-//   });
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Successfully connected to DB');
+  })
+  .catch((err) => {
+    console.log('ERROR connecting to DB: ', err);
+  });
 
 const app = require('./app');
 
 const port = process.env.PORT || 3000;
 
 const server = app.listen(port, () => {
-  console.log(`App is running on port: ${port}`);
+  console.log(`${process.env.NODE_ENV} server is running on port: ${port}`);
 });
 
 process.on('unhandledRejection', (err) => {
