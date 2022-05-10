@@ -6,12 +6,14 @@ const router = express.Router({ mergeParams: true });
 
 router.use(authController.protect);
 
+router.get('/user', upvoteController.getUserUpvotes);
+
 router
   .route('/')
   .all(upvoteController.setIdArgs)
   .post(upvoteController.createUpvote)
   .delete(upvoteController.deleteUpvote);
 
-router.use(authController.adminOnly);
+// router.use(authController.adminOnly);
 
 module.exports = router;

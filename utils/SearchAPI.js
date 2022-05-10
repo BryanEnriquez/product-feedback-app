@@ -31,7 +31,7 @@ class SearchAPI {
       const [operator, opVal] = Object.entries(val)[0];
 
       // Only allow some operators
-      if (!/^(gte|gt|lte|lt)$/.test(operator)) return;
+      if (!/^(gte|gt|lte|lt|ne)$/.test(operator)) return;
 
       whereObj[key] = { [Op[operator]]: opVal };
     });

@@ -1,0 +1,27 @@
+@import "./variables";
+
+.sort-tab {
+  padding: 8px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $color-blue-darkest;
+
+  @media (min-width: $media-m) {
+    margin-top: 40px;
+    padding: 14px 12px 14px 24px;
+    border-radius: 10px;
+  }
+  @media (min-width: $media-l) {
+    margin-top: 0;
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    padding-right: 16px;
+  }
+
+  &__fb {
+    display: flex;
+    align-items: center;
+    color: $color-white;
+  }
+}

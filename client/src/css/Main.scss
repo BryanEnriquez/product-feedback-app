@@ -1,0 +1,14 @@
+@import "./variables";
+
+.main {
+  overflow: hidden;
+
+  @media (min-width: $media-m) {
+    max-width: 68.9rem;
+    margin: 0 auto;
+  }
+  @media (min-width: $media-l) {
+    padding: 0 165px 0 165px;
+    max-width: calc(111rem + 330px);
+  }
+}
