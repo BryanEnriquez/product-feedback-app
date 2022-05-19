@@ -178,14 +178,22 @@ const onCommentInsertFn = '' +
     'RETURNS TRIGGER ' +
     'LANGUAGE PLPGSQL ' +
   'AS $$ ' +
+  'DECLARE ' +
+    'author_copy VARCHAR(20); ' +
+    'parent_id_copy INTEGER; ' +
   'BEGIN ' +
     'IF new.parent_id IS NOT NULL THEN ' +
-      'IF NOT EXISTS ( ' +
-        'SELECT 1 FROM comment WHERE new.parent_id = comment_id AND ' +
-          'new.product_request_id = product_request_id AND deleted = false ' +
-      ") THEN RAISE EXCEPTION 'Product request IDs do not match.'; " +
+      'author_copy := (SELECT author[1] FROM comment WHERE new.parent_id = comment_id AND ' +
+        'new.product_request_id = product_request_id AND deleted = false' +
+      '); ' +
+      'IF author_copy IS NULL THEN ' +
+        "RAISE EXCEPTION 'Product request IDs do not match.'; " +
       'END IF; ' +
-      "new.reply_to := (SELECT author[1] FROM comment WHERE new.parent_id = comment_id); " +
+      'new.reply_to := author_copy; ' +
+      'parent_id_copy := (SELECT parent_id FROM comment WHERE new.parent_id = comment_id AND depth = 1); ' +
+      'IF parent_id_copy IS NOT NULL THEN ' +
+        'new.parent_id := parent_id_copy; ' +
+      "END IF; " +
     'END IF; ' +
     'UPDATE product_request SET comments = comments + 1 ' +
       'WHERE new.product_request_id = product_request_id; ' +

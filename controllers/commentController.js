@@ -66,13 +66,14 @@ exports.getAllComments = catchAsync(async (req, res, next) => {
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 1 || 10;
   const offset = (page - 1) * limit;
+  const newest = req.query.newest === 'true' ? 'DESC' : 'ASC';
 
   const comments = await Comment.findAll({
     where: {
       productRequestId: req.query.productRequestId,
       parentId: { [Op.is]: null },
     },
-    order: [['created_at', 'DESC']],
+    order: [['created_at', newest]],
     include: { model: Comment },
     limit,
     offset,

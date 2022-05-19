@@ -1,21 +1,30 @@
-import { Link } from "react-router-dom";
-import "../css/Button.scss";
+import { Link } from 'react-router-dom';
+import '../css/Button.scss';
 
-function Button(props) {
-  const base = props.to ? "link" : "btn";
-  const style = `${base} btn--${props.color}`;
+function Button({ to, label, onClick, onSubmit, disabled, color }) {
+  const base = to ? 'link' : 'btn';
+  const style = `${base} btn--${color}`;
 
-  return props.to ? (
-    <Link className={style} to={props.to}>
-      {props.label}
+  return to ? (
+    <Link className={style} to={to}>
+      {label}
     </Link>
+  ) : onClick ? (
+    <button className={style} onClick={onClick} disabled={disabled}>
+      {label}
+    </button>
   ) : (
-    <button className={style} onClick={props.onClick} disabled={props.disabled}>
-      {props.label}
+    <button
+      type="submit"
+      className={style}
+      onSubmit={onSubmit}
+      disabled={disabled}
+    >
+      {label}
     </button>
   );
 }
 
-Button.defaultProps = { color: "violet", disabled: false };
+Button.defaultProps = { color: 'violet', disabled: false };
 
 export default Button;

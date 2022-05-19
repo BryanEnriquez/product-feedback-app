@@ -1,11 +1,12 @@
-import { useSelector } from "react-redux";
-import Button from "./Button";
-import SuggestionsCounter from "./SuggestionsCounter";
-import SuggestionsDropdown from "../features/suggestions/SuggestionsDropdown";
-import "../css/SortTab.scss";
+import { useSelector } from 'react-redux';
+import Button from './Button';
+import SuggestionsCounter from './SuggestionsCounter';
+import SuggestionsDropdown from '../features/suggestions/SuggestionsDropdown';
+import { selectCurrentUser } from '../features/user/currentUserSlice';
+import '../css/SortTab.scss';
 
 function SortTab() {
-  const user = useSelector(state => state.user);
+  const user = useSelector(selectCurrentUser);
 
   return (
     <div className="sort-tab">
@@ -13,10 +14,7 @@ function SortTab() {
         <SuggestionsCounter />
         <SuggestionsDropdown />
       </div>
-      <Button
-        to={user ? "/feedback-create" : "/login"}
-        label="+ Add Feedback"
-      />
+      <Button to={user ? '/new-feedback' : '/login'} label="+ Add Feedback" />
     </div>
   );
 }

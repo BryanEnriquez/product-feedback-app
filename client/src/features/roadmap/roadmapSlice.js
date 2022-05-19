@@ -59,6 +59,9 @@ const roadmapSlice = createSlice({
   name: 'roadmap',
   initialState,
   reducers: {
+    incRoadmapCommentCount: (state, action) => {
+      state.entities[action.payload].comments++;
+    },
     resetRoadmapState: () => initialState,
     addOneRmSuggestion: (state, action) => {
       roadmapAdapter.setOne(state, action.payload);
@@ -80,9 +83,12 @@ const roadmapSlice = createSlice({
         state.page++;
         state.results = results;
 
-        data.forEach(el => {
+        state.total = { planned: 0, 'in-progress': 0, live: 0 };
+
+        roadmapAdapter.setMany(state, data);
+
+        Object.values(state.entities).forEach(el => {
           state.total[el.status]++;
-          roadmapAdapter.setOne(state, el);
         });
 
         state.loaded = state.ids.length;
@@ -98,7 +104,8 @@ const roadmapSlice = createSlice({
 
 export default roadmapSlice.reducer;
 
-export const { resetRoadmapState, addOneRmSuggestion } = roadmapSlice.actions;
+export const { resetRoadmapState, addOneRmSuggestion, incRoadmapCommentCount } =
+  roadmapSlice.actions;
 
 ///// Selectors /////
 export const selectRmFetchStatus = state => state.roadmap.status;

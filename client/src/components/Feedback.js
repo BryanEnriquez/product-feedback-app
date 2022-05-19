@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { selectByUpvoteId } from '../upvotes/upvotesSlice';
-import { upvoteAdded, upvoteRemoved } from '../upvotes/upvoteThunks';
-import { ReactComponent as UpvoteIcon } from '../../images/shared/icon-arrow-up.svg';
-import '../../css/Suggestion.scss';
+import { selectByUpvoteId } from '../features/upvotes/upvotesSlice';
+import { upvoteAdded, upvoteRemoved } from '../features/upvotes/upvoteThunks';
+import { ReactComponent as UpvoteIcon } from '../images/shared/icon-arrow-up.svg';
+import '../css/Feedback.scss';
 
 const tags = {
   ui: 'UI',
@@ -19,7 +19,7 @@ const trimText = text => {
   return `${text.substring(0, 72)}${text.length > 72 ? '..' : ''}`;
 };
 
-function Suggestion({ item, dispatch, currentUser, group }) {
+function Feedback({ item, dispatch, currentUser, group }) {
   const [reqStatus, setReqStatus] = useState('idle');
   const upvote = useSelector(state =>
     selectByUpvoteId(state, item.productRequestId)
@@ -42,12 +42,12 @@ function Suggestion({ item, dispatch, currentUser, group }) {
       // TODO
       console.log('Upvote error: ', err);
     } finally {
-      setTimeout(() => setReqStatus('idle'), 1500);
+      setTimeout(() => setReqStatus('idle'), 1000);
     }
   };
 
-  const classes = cn('suggestion__content', {
-    'suggestion__content--g': group,
+  const classes = cn('feedback__content', {
+    'feedback__content--g': group,
   });
 
   const content = (
@@ -59,10 +59,10 @@ function Suggestion({ item, dispatch, currentUser, group }) {
   );
 
   return (
-    <li className="suggestion">
+    <li className="feedback">
       <button
-        className={cn('suggestion__upvotes', {
-          'suggestion__upvotes--upvoted': upvote.upvoted || false,
+        className={cn('feedback__upvotes', {
+          'feedback__upvotes--upvoted': upvote.upvoted || false,
         })}
         onClick={onUpvoteClick}
       >
@@ -70,13 +70,13 @@ function Suggestion({ item, dispatch, currentUser, group }) {
         {upvote.upvotes}
       </button>
       {group ? (
-        <Link to={`/suggestions/${item.productRequestId}`} className={classes}>
+        <Link to={`/feedback/${item.productRequestId}`} className={classes}>
           {content}
         </Link>
       ) : (
         <div className={classes}>{content}</div>
       )}
-      <div className="suggestion__comments">
+      <div className="feedback__comments">
         <span {...(!item.comments && { className: 'none' })}>
           {item.comments}
         </span>
@@ -85,6 +85,6 @@ function Suggestion({ item, dispatch, currentUser, group }) {
   );
 }
 
-Suggestion.defaultProps = { group: true };
+Feedback.defaultProps = { group: true };
 
-export default Suggestion;
+export default Feedback;

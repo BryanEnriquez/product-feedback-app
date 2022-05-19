@@ -1,0 +1,98 @@
+@import './variables';
+
+.reply-form {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 12px;
+  align-items: start;
+  padding-bottom: 8px; // 24px
+  background-color: $color-white;
+
+  @media (min-width: $media-m) {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0px 16px;
+    padding-left: 72px;
+  }
+
+  &--1 {
+    padding-top: 24px;
+    padding-bottom: 0;
+    // @media (min-width: $media-m) {
+    //   padding-bottom: 7px;
+    // }
+  }
+
+  label {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    left: 10000px;
+  }
+
+  textarea {
+    padding: 16px;
+    height: 120px;
+    resize: vertical;
+    font-family: 'Jost', sans-serif;
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+    outline: none;
+    border: 1px solid transparent;
+    color: $color-blue-dark;
+    background-color: $color-white-2;
+    border-radius: 5px;
+    transition: border-color 0.2s;
+    grid-row: 1 / 2;
+    grid-column: 1 / 3;
+
+    &:focus {
+      border: 1px solid $color-blue;
+    }
+
+    @media (min-width: $media-m) {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+
+      height: 80px;
+      padding: 16px 24px;
+      font-size: 1.5rem;
+      line-height: 2.2rem;
+
+      &:hover {
+        border: 1px solid $color-blue;
+      }
+    }
+  }
+
+  span {
+    display: block;
+    font-size: 1.3rem;
+    min-height: 1.9rem;
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+    color: $color-red;
+
+    @media (min-width: $media-m) {
+      grid-row: 2 / 3;
+      grid-column: 1 / 3;
+      font-size: 1.4rem;
+      min-height: 2rem;
+    }
+  }
+
+  button {
+    justify-self: end;
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+
+    @media (min-width: $media-m) {
+      grid-row: 1 / 2;
+      grid-column: 2 / 3;
+    }
+  }
+}

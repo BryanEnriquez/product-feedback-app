@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import RequireAuth from './components/RequireAuth';
 import RequireNoAuth from './components/RequireNoAuth';
 import CurrentUser from './features/user/CurrentUser';
 import Main from './layout/Main';
 import Home from './routes/Home';
-import Suggestions from './routes/Suggestions';
+import FeedbackPage from './routes/FeedbackPage';
+import NewFeedback from './routes/NewFeedback';
 import Login from './routes/Login';
 import './App.scss';
 
@@ -22,14 +24,16 @@ function App() {
               </RequireNoAuth>
             }
           />
+          <Route path="feedback/:productRequestId" element={<FeedbackPage />} />
+          <Route path="edit-feedback/:productRequestId" element={<div />} />
           <Route
-            path="suggestions/:productRequestId"
-            element={<Suggestions />}
+            path="new-feedback"
+            element={
+              <RequireAuth>
+                <NewFeedback />
+              </RequireAuth>
+            }
           />
-          {/* <Route
-            path="edit-suggestion/:productRequestId"
-            element={<div />}
-          /> */}
         </Route>
       </Routes>
     </BrowserRouter>

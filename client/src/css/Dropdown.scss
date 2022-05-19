@@ -1,75 +1,174 @@
-@import "./variables";
+@import './variables';
 
 .dd {
   position: relative;
   color: #f2f4fe;
 
-  &__box {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    grid-template-rows: auto;
-    align-items: center;
-    gap: 9px;
+  &--a,
+  &--b {
+    font-size: 1.3rem;
+    line-height: 1.9rem;
 
-    &--disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
+    li {
+      font-size: 1.4rem;
+      line-height: 2rem;
     }
   }
 
-  &__btn {
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.2px;
-    transition: opacity 0.2s;
+  @media (min-width: $media-m) {
+    // Sort dropdown
+    &--a {
+      font-size: 1.4rem;
+      line-height: 2rem;
 
-    &--enabled:hover {
-      cursor: pointer;
-      opacity: 0.75;
+      li {
+        font-size: 1.6rem;
+        line-height: 2.3rem;
+      }
+    }
+
+    // Form dropdown
+    &--b {
+      font-size: 1.5rem;
+      line-height: 2.2rem;
+
+      li {
+        font-size: 1.6rem;
+        line-height: 2.3rem;
+      }
+    }
+  }
+
+  &__box {
+    display: flex;
+
+    &--a {
+      align-items: center;
+      transition: opacity 0.2s;
+
+      @media (min-width: $media-m) {
+        &:hover {
+          cursor: pointer;
+          opacity: 0.75;
+        }
+      }
+    }
+
+    &--b {
+      flex-direction: column;
+      color: $color-blue-dark;
+    }
+
+    &.dd__box--disabled {
+      opacity: 0.5;
     }
   }
 
   &__label {
     display: block;
-  }
 
-  &__selected {
-    font-weight: 600;
-  }
+    &--a {
+      letter-spacing: 0.2px;
+    }
 
-  svg {
-    margin-top: 2px;
-    width: 1rem;
-    height: 0.7rem;
+    &--b {
+      margin-bottom: 3px;
+      font-weight: 700;
+      letter-spacing: 0.18px;
 
-    path {
-      stroke: $color-white;
+      @media (min-width: $media-m) {
+        margin-bottom: 2px;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        letter-spacing: 0.19px;
+      }
     }
   }
 
+  &__desc {
+    margin-bottom: 16px;
+    color: $color-blue-grey;
+
+    @media (min-width: $media-m) {
+      font-size: 1.4rem;
+      line-height: 2rem;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Jost', sans-serif;
+    font-size: inherit;
+    cursor: pointer;
+    border: 0;
+    color: inherit;
+
+    &--a {
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      background-color: inherit;
+
+      svg path {
+        stroke: $color-white;
+      }
+    }
+
+    &--b {
+      outline: none;
+      padding: 13px 15px 14px 15px;
+      background-color: $color-white-2;
+      border: 1px solid transparent;
+      border-radius: 5px;
+
+      @media (min-width: $media-m) {
+        padding: 12px 23px 12px 23px;
+      }
+
+      &:focus {
+        border: 1px solid $color-blue;
+      }
+    }
+  }
+
+  svg {
+    display: inline-block;
+    pointer-events: none;
+    margin-top: 2px;
+    margin-left: 9px;
+    width: 1rem;
+    height: 0.7rem;
+  }
+
   &__list-wrapper {
+    display: none;
     position: absolute;
-    top: calc(100% + 20px);
-    height: 0px;
-    width: 20rem;
     border-radius: 10px;
     overflow: hidden;
     background-color: $color-white;
     box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.35);
-    transition: height 0.2s, opacity 0.2s;
-    opacity: 0.7;
+    transition: opacity 0.2s;
+    opacity: 0.85;
 
-    @media (min-width: $media-m) {
-      top: calc(100% + 42px);
-      width: 25.5rem;
+    &--a {
+      width: 20rem;
+      top: calc(100% + 20px);
+
+      @media (min-width: $media-m) {
+        width: 25.5rem;
+        top: calc(100% + 42px);
+      }
+    }
+
+    &--b {
+      width: 100%;
+      top: calc(100% + 16px);
     }
 
     &--open {
-      height: 17.9rem;
+      display: block;
       opacity: 1;
-      @media (min-width: $media-m) {
-        height: 19.1rem;
-      }
     }
   }
 
@@ -107,48 +206,15 @@
         width: 1.1rem;
         height: calc(1.1rem * 0.846);
         transform: translateY(-50%);
-        content: "";
+        content: '';
         background-image: url(../images/shared/icon-check.svg);
         background-size: cover;
 
         @media (min-width: $media-m) {
           right: 24px;
+          width: 1.2rem;
+          height: calc(1.2rem * 0.846);
         }
-      }
-    }
-  }
-
-  &--a,
-  &--b {
-    font-size: 1.3rem;
-    line-height: 1.9rem;
-
-    li {
-      font-size: 1.4rem;
-      line-height: 2rem;
-    }
-  }
-
-  @media (min-width: $media-m) {
-    // Sort dropdown
-    &--a {
-      font-size: 1.4rem;
-      line-height: 2rem;
-
-      li {
-        font-size: 1.6rem;
-        line-height: 2.3rem;
-      }
-    }
-
-    // Form dropdown
-    &--b {
-      font-size: 1.5rem;
-      line-height: 2.2rem;
-
-      li {
-        font-size: 1.6rem;
-        line-height: 2.3rem;
       }
     }
   }

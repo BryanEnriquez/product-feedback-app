@@ -57,7 +57,7 @@ module.exports = (err, req, res, next) => {
   err.statusCode ??= 500;
   err.status ??= 'error';
 
-  if (process.env.NODE_ENV === 'dev2') return sendErrorDev(err, req, res);
+  if (process.env.NODE_ENV === 'dev') return sendErrorDev(err, req, res);
 
   const trustedErr = errMsg[err.name]?.(err);
 

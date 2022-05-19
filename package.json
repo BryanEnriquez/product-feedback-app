@@ -10,7 +10,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "prod:local": "SET NODE_ENV=production&& nodemon server.js"
+    "prod:local": "SET NODE_ENV=production&& nodemon server.js",
+    "debug": "ndb server.js"
   },
   "repository": {
     "type": "git",

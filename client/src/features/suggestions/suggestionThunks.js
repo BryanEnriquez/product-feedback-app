@@ -1,8 +1,9 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { addFetchedUpvotes } from '../upvotes/upvotesSlice';
-import { addOneSuggestion } from './suggestionsSlice';
 import { addOneRmSuggestion } from '../roadmap/roadmapSlice';
+
+export const addOneSuggestion = createAction('suggestions/addOneSuggestion');
 
 export const fetchSuggestions = createAsyncThunk(
   'suggestions/fetchSuggestions',
@@ -74,5 +75,39 @@ export const fetchOneSuggestion = createAsyncThunk(
         ? addOneSuggestion(suggestionVal)
         : addOneRmSuggestion(suggestionVal)
     );
+  }
+);
+
+export const submitSuggestion = createAsyncThunk(
+  'suggestions/submitSuggestion',
+  async ({ title, description, category }, thunkAPI) => {
+    try {
+      const { data } = await axios.post('/api/v1/productRequests', {
+        productId: 1,
+        title,
+        description,
+        category: category.label.toLowerCase(),
+      });
+
+      const newSuggestion = data.data.data;
+
+      // Starts as not upvoted by user
+      thunkAPI.dispatch(
+        addFetchedUpvotes([
+          {
+            productRequestId: newSuggestion.productRequestId,
+            upvotes: newSuggestion.upvotes,
+            upvoted: false,
+          },
+        ])
+      );
+
+      thunkAPI.dispatch(addOneSuggestion(newSuggestion));
+
+      // Not processed by reducer but used for redirect link
+      return newSuggestion.productRequestId;
+    } catch (err) {
+      return thunkAPI.rejectWithValue(err.response.data.message);
+    }
   }
 );

@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setSort } from "./suggestionsSlice";
-import Dropdown from "../../components/Dropdown";
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSort } from './suggestionsSlice';
+import Dropdown from '../../components/Dropdown';
 
 const options = [
-  { label: "Most Upvotes", value: "upvotes" },
-  { label: "Least Upvotes", value: "-upvotes" },
-  { label: "Most Comments", value: "comments" },
-  { label: "Least Comments", value: "-comments" },
+  { id: 'most_upvotes', label: 'Most Upvotes' },
+  { id: 'least_upvotes', label: 'Least Upvotes' },
+  { id: 'most_comments', label: 'Most Comments' },
+  { id: 'least_comments', label: 'Least Comments' },
 ];
 
 function SuggestionsDropdown() {
@@ -15,7 +15,7 @@ function SuggestionsDropdown() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setSort(selected.value));
+    dispatch(setSort(selected.id));
   }, [selected, dispatch]);
 
   return (

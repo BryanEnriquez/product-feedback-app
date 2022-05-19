@@ -1,0 +1,32 @@
+@import './variables';
+
+.back-link {
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: 0;
+  color: $color-blue-grey;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  transition: text-decoration 5s;
+
+  @media (min-width: $media-m) {
+    font-size: 1.4rem;
+    line-height: 2rem;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  &::before {
+    display: inline-block;
+    width: 0.7rem;
+    height: 1rem;
+    margin-right: 13px;
+    content: '';
+    background-image: url(../images/shared/icon-arrow-left.svg);
+    background-size: cover;
+  }
+}

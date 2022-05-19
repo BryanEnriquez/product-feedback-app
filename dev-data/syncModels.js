@@ -96,9 +96,21 @@ async function resetData() {
   await sequelize.close();
 }
 
-// Ex. node database/syncModels.js --option
+async function rebuildTriggers() {
+  try {
+    // await createUpvoteTriggers(sequelize);
+    // await createProductRequestTriggers(sequelize);
+    await createCommentTriggers(sequelize);
+  } catch (err) {
+    console.log('Error rebuilding triggers: ', err);
+  }
+  await sequelize.close();
+}
+
+// Ex. node dev-data/syncModels.js --option
 const option = process.argv[2];
 if (option === '--create') syncDB();
 else if (option === '--rebuild') syncDB({ force: true });
 else if (option === '--alter') syncDB({ alter: true });
 else if (option === '--resetData') resetData();
+else if (option === '--rebuildTriggers') rebuildTriggers();

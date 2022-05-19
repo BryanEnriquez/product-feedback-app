@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Suggestion from './Suggestion';
+import Feedback from '../../components/Feedback';
 import {
   selectCategory,
   selectCanLoadMore,
@@ -14,10 +14,10 @@ import { selectCurrentUser } from '../user/currentUserSlice';
 import '../../css/SuggestionsList.scss';
 
 const sorters = {
-  upvotes: (a, b) => b.upvotes - a.upvotes,
-  '-upvotes': (a, b) => a.upvotes - b.upvotes,
-  comments: (a, b) => b.comments - a.comments,
-  '-comments': (a, b) => a.comments - b.comments,
+  most_upvotes: (a, b) => b.upvotes - a.upvotes,
+  least_upvotes: (a, b) => a.upvotes - b.upvotes,
+  most_comments: (a, b) => b.comments - a.comments,
+  least_comments: (a, b) => a.comments - b.comments,
 };
 
 function SuggestionsList() {
@@ -47,7 +47,7 @@ function SuggestionsList() {
     const sortedList = filteredList.slice().sort(sorters[sortBy]);
 
     content = sortedList.map(el => (
-      <Suggestion
+      <Feedback
         key={el.productRequestId}
         item={el}
         dispatch={dispatch}

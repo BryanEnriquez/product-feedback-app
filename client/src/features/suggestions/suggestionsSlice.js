@@ -3,7 +3,7 @@ import {
   createEntityAdapter,
   createSelector,
 } from '@reduxjs/toolkit';
-import { fetchSuggestions } from './suggestionThunks';
+import { fetchSuggestions, addOneSuggestion } from './suggestionThunks';
 
 const suggestionsAdapter = createEntityAdapter({
   selectId: suggestion => suggestion.productRequestId,
@@ -22,7 +22,7 @@ const initialState = suggestionsAdapter.getInitialState({
     feature: 0,
     enhancement: 0,
   },
-  sortBy: 'upvotes',
+  sortBy: 'most_upvotes',
   category: 'all',
   status: 'idle',
   error: null,
@@ -39,13 +39,8 @@ const suggestionsSlice = createSlice({
     setSort: (state, action) => {
       state.sortBy = action.payload;
     },
-    addOneSuggestion: (state, action) => {
-      suggestionsAdapter.setOne(state, action.payload);
-
-      Object.values(state.entities).forEach(el => {
-        state.total.all++;
-        state.total[el.category]++;
-      });
+    incSuggestCommentCount: (state, action) => {
+      state.entities[action.payload].comments++;
     },
     resetSuggestState: () => initialState,
   },
@@ -61,10 +56,14 @@ const suggestionsSlice = createSlice({
         state.page++;
         state.results = results;
 
-        data.forEach(el => {
+        Object.keys(state.total).forEach(key => {
+          state.total[key] = 0;
+        });
+
+        suggestionsAdapter.setMany(state, data);
+        Object.values(state.entities).forEach(el => {
           state.total.all++;
           state.total[el.category]++;
-          suggestionsAdapter.setOne(state, el);
         });
 
         state.loaded = state.ids.length;
@@ -74,6 +73,17 @@ const suggestionsSlice = createSlice({
       .addCase(fetchSuggestions.rejected, (state, action) => {
         state.status = 'rejected';
         state.error = action.error.message;
+      })
+      .addCase(addOneSuggestion, (state, action) => {
+        suggestionsAdapter.setOne(state, action.payload);
+
+        state.total.all++;
+        state.total[action.payload.category]++;
+        // state.total = { all: 0, ui: 0, ux: 0, bug: 0, feature: 0, enhancement: 0 };
+        // Object.values(state.entities).forEach(el => {
+        //   state.total.all++;
+        //   state.total[el.category]++;
+        // });
       });
   },
 });
@@ -81,8 +91,12 @@ const suggestionsSlice = createSlice({
 export default suggestionsSlice.reducer;
 
 ///// Action creators /////
-export const { setCategory, setSort, resetSuggestState, addOneSuggestion } =
-  suggestionsSlice.actions;
+export const {
+  setCategory,
+  setSort,
+  resetSuggestState,
+  incSuggestCommentCount,
+} = suggestionsSlice.actions;
 
 ///// Selectors /////
 export const selectSuggestFetchStatus = state => state.suggestions.status;
