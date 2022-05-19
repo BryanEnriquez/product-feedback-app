@@ -11,7 +11,7 @@ export const fetchCurrentUser = createAsyncThunk(
   async () => {
     const { data } = await axios.get('/api/v1/users/loginStatus');
 
-    return data.user || null;
+    return data.user || false;
   }
 );
 
@@ -59,7 +59,7 @@ const currentUserSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(logout.fulfilled, state => {
-        state.user = null;
+        state.user = false;
       });
   },
 });

@@ -14,7 +14,10 @@ function SortTab() {
         <SuggestionsCounter />
         <SuggestionsDropdown />
       </div>
-      <Button to={user ? '/new-feedback' : '/login'} label="+ Add Feedback" />
+      <Button
+        to={user ? '/new-feedback' : user === null ? '/' : '/login'}
+        label="+ Add Feedback"
+      />
     </div>
   );
 }

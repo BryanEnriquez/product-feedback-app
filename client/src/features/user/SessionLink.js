@@ -6,7 +6,7 @@ import '../../css/SessionLink.scss';
 
 const SessionLink = ({ className }) => {
   const [status, setStatus] = useState('idle');
-  const user = useSelector(selectCurrentUser);
+  const currentUser = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
   const onClickLogout = async () => {
@@ -24,10 +24,12 @@ const SessionLink = ({ className }) => {
 
   return (
     <div className={className}>
-      {user ? (
+      {currentUser ? (
         <Link to="/" onClick={onClickLogout}>
           Log out
         </Link>
+      ) : currentUser === null ? (
+        <span />
       ) : (
         <Link to="/login">Log In</Link>
       )}
