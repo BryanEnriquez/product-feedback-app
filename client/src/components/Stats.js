@@ -34,7 +34,7 @@ function Stats() {
 
   return (
     <div className="stats">
-      <span className="stats__title">Roadmap</span>
+      <h2 className="stats__title">Roadmap</h2>
       <Link
         to="/roadmap"
         className={`stats__link${!summary.all ? ' stats__link--none' : ''}`}

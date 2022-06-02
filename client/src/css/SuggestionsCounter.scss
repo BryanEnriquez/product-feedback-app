@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 .suggest-counter {
   display: flex;
@@ -9,8 +9,7 @@
     display: none;
   }
 
-  span {
-    display: block;
+  h2 {
     margin-left: 16px;
     font-size: 1.8rem;
     line-height: 2.6rem;

@@ -1,10 +1,10 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 import {
   selectCategory,
   selectCounters,
-} from "../features/suggestions/suggestionsSlice";
-import { ReactComponent as Bulb } from "../images/suggestions/icon-suggestions.svg";
-import "../css/SuggestionsCounter.scss";
+} from '../features/suggestions/suggestionsSlice';
+import { ReactComponent as Bulb } from '../images/suggestions/icon-suggestions.svg';
+import '../css/SuggestionsCounter.scss';
 
 function SuggestionsCounter() {
   const suggestionsCount = useSelector(selectCounters);
@@ -13,9 +13,9 @@ function SuggestionsCounter() {
   return (
     <div className="suggest-counter">
       <Bulb />
-      <span>{`${
-        suggestionsCount[category === "all" ? "all" : category]
-      } Suggestions`}</span>
+      <h2>{`${
+        suggestionsCount[category === 'all' ? 'all' : category]
+      } Suggestions`}</h2>
     </div>
   );
 }

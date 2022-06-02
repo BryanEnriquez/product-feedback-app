@@ -54,7 +54,7 @@ function Feedback({
 
   const copy = (
     <>
-      <h3>{item.title}</h3>
+      <span>{item.title}</span>
       <p>{group ? trimText(item.description) : item.description}</p>
       <div>{tags[item.category]}</div>
     </>
