@@ -1,0 +1,75 @@
+export const demoUsers = [
+  { id: 'none', label: 'None', email: '', pw: '' },
+  {
+    id: 'demo-user-001',
+    label: 'velvetround',
+    email: 'demouser001@example.com',
+    pw: 'drepHatRLjat8o@u',
+  },
+  {
+    id: 'demo-user-002',
+    label: 'upbeat1811',
+    email: 'demouser002@example.com',
+    pw: '73putrEhUdivlw&e',
+  },
+  {
+    id: 'demo-user-003',
+    label: 'brawnybrave',
+    email: 'demouser003@example.com',
+    pw: '3eWACac30eW@0prL&e',
+  },
+  {
+    id: 'demo-user-004',
+    label: 'hexagon.bestagon',
+    email: 'demouser004@example.com',
+    pw: '9O9O!O9Iy$zoCH9w&e',
+  },
+  {
+    id: 'demo-user-005',
+    label: 'hummingbird1',
+    email: 'demouser005@example.com',
+    pw: '8*vo4re4hazoWric',
+  },
+  {
+    id: 'demo-user-006',
+    label: 'annev1990',
+    email: 'demouser006@example.com',
+    pw: '9I&ec@A5T9Z!JO5#',
+  },
+  {
+    id: 'demo-user-007',
+    label: 'voyager.344',
+    email: 'demouser007@example.com',
+    pw: 'Dr$pRib04ta@aDri',
+  },
+  {
+    id: 'demo-user-008',
+    label: 'soccerviewer8',
+    email: 'demouser008@example.com',
+    pw: 'SIst9PrA0e*8Lsu&',
+  },
+  {
+    id: 'demo-user-009',
+    label: 'warlikeduke',
+    email: 'demouser009@example.com',
+    pw: '$r7kE$rAPoz@Y@Fr',
+  },
+  {
+    id: 'demo-user-010',
+    label: 'peppersprime32',
+    email: 'demouser010@example.com',
+    pw: 'CLr*$@echo$3lchi',
+  },
+  {
+    id: 'demo-user-011',
+    label: 'arlen_the_marlin',
+    email: 'demouser011@example.com',
+    pw: 'PH!*rO59JEqO0e3&',
+  },
+  {
+    id: 'demo-user-012',
+    label: 'countryspirit',
+    email: 'demouser012@example.com',
+    pw: '&IRagaj8s4etrig9',
+  },
+];

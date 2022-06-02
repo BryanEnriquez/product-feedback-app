@@ -18,7 +18,10 @@ function CommentForm({ currentUser, productRequestId }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!currentUser) return navigate('/login');
+    if (!currentUser)
+      return navigate('/login', {
+        state: { prevPage: `/feedback/${productRequestId}` },
+      });
     if (disabled) return;
 
     if (content.length < 10) return setError('Insufficient character length.');
@@ -54,7 +57,7 @@ function CommentForm({ currentUser, productRequestId }) {
         <span>{250 - content.length} Characters left</span>
         <Button
           label="Post Comment"
-          onClick={handleSubmit}
+          onSubmit={handleSubmit}
           disabled={disabled}
         />
       </div>

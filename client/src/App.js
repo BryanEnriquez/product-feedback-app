@@ -6,13 +6,19 @@ import Main from './layout/Main';
 import Home from './routes/Home';
 import FeedbackPage from './routes/FeedbackPage';
 import NewFeedback from './routes/NewFeedback';
+import RoadmapPage from './routes/RoadmapPage';
 import Login from './routes/Login';
+import Signup from './routes/Signup';
+import ActivateAccount from './routes/ActivateAccount';
+import EditFeedback from './routes/EditFeedback';
+import Scroller from './components/Scroller';
 import './App.scss';
 
 function App() {
   return (
     <BrowserRouter>
       <CurrentUser />
+      <Scroller />
       <Routes>
         <Route path="/" element={<Main />}>
           <Route path="" element={<Home />} />
@@ -24,8 +30,31 @@ function App() {
               </RequireNoAuth>
             }
           />
+          <Route
+            path="signup"
+            element={
+              <RequireNoAuth>
+                <Signup />
+              </RequireNoAuth>
+            }
+          />
+          <Route
+            path="activate-account/:token"
+            element={
+              <RequireNoAuth>
+                <ActivateAccount />
+              </RequireNoAuth>
+            }
+          />
           <Route path="feedback/:productRequestId" element={<FeedbackPage />} />
-          <Route path="edit-feedback/:productRequestId" element={<div />} />
+          <Route
+            path="edit-feedback/:productRequestId"
+            element={
+              <RequireAuth>
+                <EditFeedback />
+              </RequireAuth>
+            }
+          />
           <Route
             path="new-feedback"
             element={
@@ -34,6 +63,7 @@ function App() {
               </RequireAuth>
             }
           />
+          <Route path="roadmap" element={<RoadmapPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

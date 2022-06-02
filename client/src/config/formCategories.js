@@ -1,7 +1,12 @@
 export const categories = [
-  { label: 'Feature', id: 'fb_feature' },
-  { label: 'UI', id: 'fb_ui' },
-  { label: 'UX', id: 'fb_ux' },
-  { label: 'Enhancement', id: 'fb_enhancement' },
-  { label: 'Bug', id: 'fb_bug' },
+  { label: 'Feature', id: 'feature' },
+  { label: 'UI', id: 'ui' },
+  { label: 'UX', id: 'ux' },
+  { label: 'Enhancement', id: 'enhancement' },
+  { label: 'Bug', id: 'bug' },
 ];
+
+export const categoriesObj = categories.reduce((obj, el) => {
+  obj[el.id] = el;
+  return obj;
+}, {});

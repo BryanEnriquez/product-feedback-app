@@ -1,26 +1,30 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setCategory } from "../features/suggestions/suggestionsSlice";
-import "../css/Filter.scss";
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectCategory,
+  setCategory,
+} from '../features/suggestions/suggestionsSlice';
+import '../css/Filter.scss';
 
-const options = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
+const options = [
+  { label: 'All', value: 'all' },
+  { label: 'UI', value: 'ui' },
+  { label: 'UX', value: 'ux' },
+  { label: 'Enhancement', value: 'enhancement' },
+  { label: 'Bug', value: 'bug' },
+  { label: 'Feature', value: 'feature' },
+];
 
 function Filter() {
-  const [option, setOption] = useState("All");
+  const option = useSelector(selectCategory);
   const dispatch = useDispatch();
-
-  const onOptionClick = option => {
-    setOption(option);
-    dispatch(setCategory(option));
-  };
 
   const renderedOptions = options.map(op => (
     <li
-      key={op}
-      className={`op${op === option ? " op--active" : ""}`}
-      onClick={() => onOptionClick(op)}
+      key={op.value}
+      className={`op${option === op.value ? ' op--active' : ''}`}
+      onClick={() => dispatch(setCategory(op.value))}
     >
-      {op}
+      {op.label}
     </li>
   ));
 

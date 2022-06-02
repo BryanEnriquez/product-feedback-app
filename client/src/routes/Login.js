@@ -1,9 +1,12 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import Button from '../components/Button';
 import isEmail from 'validator/lib/isEmail';
+import BackLink from '../components/BackLink';
+import Button from '../components/Button';
+import Dropdown from '../components/Dropdown';
 import { login } from '../features/user/currentUserSlice';
+import { demoUsers } from '../config/demoUsers';
 import '../css/Login.scss';
 
 function Login() {
@@ -11,11 +14,17 @@ function Login() {
   const [emailErr, setEmailErr] = useState('');
   const [pw, setPw] = useState('');
   const [pwErr, setPwErr] = useState('');
+  const [demoUser, setDemoUser] = useState(demoUsers[0]);
   const [status, setStatus] = useState('idle');
   const [loginMsg, setLoginMsg] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const formRef = useRef(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setEmail(demoUser.email);
+    setPw(demoUser.pw);
+  }, [demoUser]);
 
   const onLoginClick = async e => {
     e.preventDefault();
@@ -36,7 +45,7 @@ function Login() {
 
     try {
       await dispatch(login({ email, password: pw })).unwrap();
-      setStatus('filfilled');
+      setStatus('fulfilled');
       setEmail('');
       setPw('');
     } catch (err) {
@@ -49,14 +58,14 @@ function Login() {
   };
 
   return (
-    <div className="login-wrapper" onSubmit={onLoginClick}>
+    <div className="login-wrapper">
       <div className="login">
-        <div>Go Back</div>
+        <BackLink />
         <h1>Log in with an existing account</h1>
         <p>{loginMsg}</p>
-        <form ref={formRef}>
-          <div>
-            <label htmlFor="email">Email:</label>
+        <form className="login-form" ref={formRef} onSubmit={onLoginClick}>
+          <div className="login-form__item">
+            <label htmlFor="email">Email</label>
             <input
               type="text"
               name="email"
@@ -64,10 +73,10 @@ function Login() {
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
-            <span>{emailErr}</span>
+            <span className="login-form__err">{emailErr}</span>
           </div>
-          <div>
-            <label htmlFor="password">Password:</label>
+          <div className="login-form__item">
+            <label htmlFor="password">Password</label>
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -75,9 +84,20 @@ function Login() {
               value={pw}
               onChange={e => setPw(e.target.value)}
             />
-            <span>{pwErr}</span>
+            <span className="login-form__err">{pwErr}</span>
           </div>
           <div>
+            <Dropdown
+              label="Demo User"
+              description="Login as a demo user."
+              options={demoUsers}
+              selected={demoUser}
+              setSelected={setDemoUser}
+              disabled={status !== 'idle'}
+              type="b"
+            />
+          </div>
+          <div className="login-form__toggle-item">
             <label htmlFor="pw-checkbox">Show password</label>
             <input
               type="checkbox"
@@ -87,13 +107,18 @@ function Login() {
             />
           </div>
           <Button
-            onClick={onLoginClick}
+            onSubmit={onLoginClick}
             label="Log In"
-            color="blue"
             disabled={status !== 'idle'}
           />
         </form>
-        <Link to="/signup">Don't have an account? Sign up here!</Link>
+        <Link
+          to="/signup"
+          state={{ prevPage: '/login' }}
+          className="login__signup"
+        >
+          Don't have an account? Sign up here!
+        </Link>
       </div>
     </div>
   );

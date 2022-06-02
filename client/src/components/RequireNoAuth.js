@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../features/user/currentUserSlice';
 
@@ -8,19 +8,24 @@ const AuthGate = ({ text }) => (
   </div>
 );
 
-function RequireNoAuth(props) {
+function RequireNoAuth({ children }) {
+  const loc = useLocation();
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
 
   if (currentUser) {
-    setTimeout(() => navigate('/', { replace: true }), 250);
+    setTimeout(
+      () => navigate(loc.state?.prevPage || '/', { replace: true }),
+      250
+    );
+
     return <AuthGate text="Redirecting.." />;
   }
 
   return currentUser === null ? (
     <AuthGate text="Checking auth status" />
   ) : (
-    props.children
+    children
   );
 }
 

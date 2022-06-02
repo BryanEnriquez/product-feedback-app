@@ -2,8 +2,20 @@ import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { addFetchedUpvotes } from '../upvotes/upvotesSlice';
 import { addOneRmSuggestion } from '../roadmap/roadmapSlice';
+import {
+  removeOneRmSuggestion,
+  updateOneRmSuggestion,
+} from '../roadmap/roadmapExtras';
 
 export const addOneSuggestion = createAction('suggestions/addOneSuggestion');
+
+export const removeOneSuggestion = createAction(
+  'suggestion/removeOneSuggestion'
+);
+
+export const updateOneSuggestion = createAction(
+  'suggestions/updateOneSuggestion'
+);
 
 export const fetchSuggestions = createAsyncThunk(
   'suggestions/fetchSuggestions',
@@ -37,11 +49,14 @@ export const fetchSuggestions = createAsyncThunk(
 
 export const fetchOneSuggestion = createAsyncThunk(
   'suggestions/fetchOneSuggestion',
-  async (id, thunkAPI) => {
-    const [suggestion, upvote] = await Promise.allSettled([
-      axios.get(`/api/v1/productRequests/${id}`),
-      axios.get('/api/v1/upvotes/user', { params: { ids: id } }),
-    ]);
+  async ({ id, currentUser }, thunkAPI) => {
+    const requests = [];
+
+    requests.push(axios.get(`/api/v1/productRequests/${id}`));
+    if (currentUser)
+      requests.push(axios.get('/api/v1/upvotes/user', { params: { ids: id } }));
+
+    const [suggestion, upvote] = await Promise.allSettled(requests);
 
     if (suggestion.status !== 'fulfilled') {
       const reason =
@@ -53,7 +68,8 @@ export const fetchOneSuggestion = createAsyncThunk(
 
     // A value of null simply disables the upvote feature
     let upvoted = null;
-    if (upvote.status === 'fulfilled') {
+    // 2nd request isn't made if not logged in
+    if (currentUser && upvote.status === 'fulfilled') {
       if (upvote.value.data.data.upvotes[0]) upvoted = true;
       else upvoted = false;
     }
@@ -108,6 +124,78 @@ export const submitSuggestion = createAsyncThunk(
       return newSuggestion.productRequestId;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response.data.message);
+    }
+  }
+);
+
+export const updateFeedback = createAsyncThunk(
+  'suggestions/updateFeedback',
+  async ({ prevFb, updatedFb }, { dispatch, rejectWithValue }) => {
+    try {
+      const { data } = await axios.patch(
+        `/api/v1/productRequests/${prevFb.productRequestId}`,
+        {
+          title: updatedFb.title,
+          description: updatedFb.description,
+          category: updatedFb.category,
+          status: updatedFb.status,
+          accountUid: prevFb.accountUid,
+        }
+      );
+
+      const newFb = data.data.data;
+
+      if (prevFb.status === newFb.status) {
+        // status is the same
+        dispatch(
+          (prevFb.status === 'suggestion'
+            ? updateOneSuggestion
+            : updateOneRmSuggestion)(newFb)
+        );
+      } else if (prevFb.status === 'suggestion') {
+        // Move from suggestions to roadmap
+        dispatch(
+          removeOneSuggestion({
+            productRequestId: prevFb.productRequestId,
+            category: prevFb.category,
+          })
+        );
+        dispatch(addOneRmSuggestion(newFb));
+      } else if (newFb.status === 'suggestion') {
+        // Move from roadmap to suggestions
+        dispatch(
+          removeOneRmSuggestion({
+            productRequestId: prevFb.productRequestId,
+            status: prevFb.status,
+          })
+        );
+        dispatch(addOneSuggestion(newFb));
+      } else {
+        // status was never 'suggestion' at any point
+        dispatch(updateOneRmSuggestion(newFb));
+      }
+    } catch (err) {
+      rejectWithValue(err.response.data.message);
+    }
+  }
+);
+
+export const deleteFeedback = createAsyncThunk(
+  'suggestions/deleteFeedback',
+  async (feedback, { dispatch, rejectWithValue }) => {
+    try {
+      await axios.delete(
+        `/api/v1/productRequests/${feedback.productRequestId}`,
+        { data: { accountUid: feedback.accountUid } }
+      );
+
+      dispatch(
+        (feedback.status === 'suggestion'
+          ? removeOneSuggestion
+          : removeOneRmSuggestion)(feedback)
+      );
+    } catch (err) {
+      rejectWithValue(err.response.data.message);
     }
   }
 );

@@ -1,4 +1,11 @@
-// import { useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectRmSummary,
+  selectRmSummaryStatus,
+  fetchRmSummary,
+} from '../features/roadmap/roadmapSlice';
 import '../css/Stats.scss';
 
 const labels = [
@@ -8,19 +15,33 @@ const labels = [
 ];
 
 function Stats() {
-  // const roadmapStats = useSelector();
+  const summary = useSelector(selectRmSummary);
+  const status = useSelector(selectRmSummaryStatus);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status !== 'idle') return;
+
+    dispatch(fetchRmSummary());
+  }, [dispatch, status]);
 
   const renderedStats = labels.map(el => (
     <li key={el[1]}>
       <span>{el[0]}</span>
-      {/* <span>{}</span> */}
+      <span>{summary[el[1]]}</span>
     </li>
   ));
 
   return (
     <div className="stats">
       <span className="stats__title">Roadmap</span>
-      <a href="/">View</a>
+      <Link
+        to="/roadmap"
+        className={`stats__link${!summary.all ? ' stats__link--none' : ''}`}
+        state={{ prevPage: '/' }}
+      >
+        View
+      </Link>
       <ul>{renderedStats}</ul>
     </div>
   );

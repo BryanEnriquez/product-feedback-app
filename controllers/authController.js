@@ -44,7 +44,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     returning: ['*'],
   });
 
-  const url = `${req.protocol}://${req.get('host')}/account-activation/${
+  const url = `${req.protocol}://${req.get('host')}/activate-account/${
     newUser.emailToken
   }`;
 

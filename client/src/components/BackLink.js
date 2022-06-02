@@ -1,16 +1,20 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { ReactComponent as LeftArrow } from '../images/shared/icon-arrow-left.svg';
 import '../css/BackLink.scss';
 
-function BackLink({ to }) {
-  const navigate = useNavigate();
+function BackLink({ customLink, replace = false, color = 'blue' }) {
+  const loc = useLocation();
 
   return (
-    <button className="back-link" onClick={() => navigate(to)}>
+    <Link
+      className={`back-link back-link--${color}`}
+      to={customLink || loc.state?.prevPage || '/'}
+      replace={replace}
+    >
+      <LeftArrow aria-hidden={true} />
       Go Back
-    </button>
+    </Link>
   );
 }
-
-BackLink.defaultProps = { to: '/' };
 
 export default BackLink;

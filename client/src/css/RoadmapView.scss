@@ -1,0 +1,145 @@
+@import './variables';
+
+.rm-view-wrapper {
+  @media (min-width: $media-m) {
+    padding-top: 32px;
+  }
+  @media (min-width: $media-l) {
+    padding-top: 48px;
+  }
+}
+
+.rm-view {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px;
+
+  @media (min-width: $media-l) {
+    gap: 32px;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    border-bottom: 1px solid rgba(140, 146, 179, 0.25);
+
+    @media (min-width: $media-m) {
+      display: none;
+    }
+  }
+
+  &__stat {
+    position: relative;
+    padding: 20px 5px 19px 5px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.9rem;
+    letter-spacing: 0.18px;
+    color: $color-blue-dark;
+    opacity: 0.4;
+
+    &--active {
+      opacity: 1;
+
+      &::before {
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        content: '';
+        height: 4px;
+        width: 100%;
+      }
+    }
+
+    &--orange::before {
+      background-color: $color-orange;
+    }
+    &--violet::before {
+      background-color: $color-violet;
+    }
+    &--blue::before {
+      background-color: $color-blue-light;
+    }
+  }
+
+  &__all {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    padding: 0 24px;
+
+    @media (min-width: $media-m) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 0;
+    }
+    @media (min-width: $media-l) {
+      gap: 30px;
+    }
+  }
+
+  &__group {
+    display: none;
+
+    @media (min-width: $media-m) {
+      display: block;
+    }
+
+    &--active {
+      display: block;
+    }
+
+    & > h2 {
+      font-size: 1.8rem;
+      line-height: 2.6rem;
+      letter-spacing: 0.25px;
+      color: $color-blue-dark;
+
+      @media (min-width: $media-m) {
+        font-size: 1.4rem;
+        line-height: 2rem;
+        letter-spacing: 0.19px;
+      }
+      @media (min-width: $media-l) {
+        font-size: 1.8rem;
+        line-height: 2.6rem;
+        letter-spacing: 0.25px;
+      }
+    }
+
+    & > p {
+      font-size: 1.3rem;
+      line-height: 1.9rem;
+      color: $color-blue-grey;
+      margin: 4px 0 24px 0;
+
+      @media (min-width: $media-m) {
+        font-size: 1.4rem;
+        line-height: 2rem;
+      }
+      @media (min-width: $media-l) {
+        font-size: 1.6rem;
+        line-height: 2.3rem;
+        margin: 4px 0 32px 0;
+      }
+    }
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 16px;
+
+    @media (min-width: $media-l) {
+      gap: 24px;
+    }
+  }
+
+  & > .btn {
+    justify-self: center;
+  }
+}

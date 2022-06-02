@@ -31,7 +31,9 @@ const SessionLink = ({ className }) => {
       ) : currentUser === null ? (
         <span />
       ) : (
-        <Link to="/login">Log In</Link>
+        <Link to="/login" state={{ prevPage: '/' }}>
+          Log In
+        </Link>
       )}
     </div>
   );

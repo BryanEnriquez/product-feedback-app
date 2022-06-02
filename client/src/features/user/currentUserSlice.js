@@ -1,10 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { resetSuggestState } from '../suggestions/suggestionsSlice';
+import { resetRoadmapState } from '../roadmap/roadmapSlice';
 
 const FEATURE = 'currentUser';
 
-const initialState = { user: null, status: 'idle', error: null };
+const initialState = {
+  user: null,
+  status: 'idle',
+  error: null,
+  invalidFbIds: {},
+};
 
 export const fetchCurrentUser = createAsyncThunk(
   `${FEATURE}/fetchCurrentUser`,
@@ -17,7 +23,7 @@ export const fetchCurrentUser = createAsyncThunk(
 
 export const login = createAsyncThunk(
   `${FEATURE}/login`,
-  async ({ email, password }, thunkAPI) => {
+  async ({ email, password }, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.post('/api/v1/users/login', {
         email,
@@ -25,11 +31,12 @@ export const login = createAsyncThunk(
       });
 
       // Reset data
-      thunkAPI.dispatch(resetSuggestState());
+      dispatch(resetSuggestState());
+      dispatch(resetRoadmapState());
 
       return data.data.user;
     } catch (err) {
-      return thunkAPI.rejectWithValue(
+      return rejectWithValue(
         err.response.data?.message || 'Server error. Try again later.'
       );
     }
@@ -45,7 +52,11 @@ export const logout = createAsyncThunk(`${FEATURE}/logout`, async () => {
 const currentUserSlice = createSlice({
   name: FEATURE,
   initialState,
-  reducers: {},
+  reducers: {
+    addInvalidFbId: (state, action) => {
+      state.invalidFbIds[action.payload] = true;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchCurrentUser.pending, state => {
@@ -67,8 +78,10 @@ const currentUserSlice = createSlice({
 export default currentUserSlice.reducer;
 
 ///// Action creators /////
-// export const { ___, __ } = currentUserSlice.actions;
+export const { addInvalidFbId } = currentUserSlice.actions;
 
 ///// Selectors /////
 export const selectCurrentUser = state => state.currentUser.user;
 export const selectStatus = state => state.currentUser.status;
+export const findInvalidFbId = (state, id) =>
+  state.currentUser.invalidFbIds[id];

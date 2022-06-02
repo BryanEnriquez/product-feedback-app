@@ -6,12 +6,12 @@ import ReplyForm from './ReplyForm';
 import userImg from '../../images/user-images/user.png';
 import '../../css/Comment.scss';
 
-function Comment({ comment, currentUser }) {
+function Comment({ comment, currentUser, prevPage }) {
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
 
   const onClickReply = () => {
-    if (!currentUser) return navigate('/login');
+    if (!currentUser) return navigate('/login', { state: { prevPage } });
     setShowForm(!showForm);
   };
 
@@ -64,6 +64,7 @@ function Comment({ comment, currentUser }) {
               key={el.commentId}
               comment={el}
               currentUser={currentUser}
+              prevPage={prevPage}
             />
           ))}
         </div>

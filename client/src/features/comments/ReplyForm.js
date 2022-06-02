@@ -47,7 +47,7 @@ function ReplyForm({ comment, closeForm, className }) {
         id="reply-content"
       />
       <span>{error}</span>
-      <Button label="Post Reply" onClick={handleSubmit} disabled={disabled} />
+      <Button label="Post Reply" onSubmit={handleSubmit} disabled={disabled} />
     </form>
   );
 }

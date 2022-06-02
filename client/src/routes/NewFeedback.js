@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import FeedbackFormWrapper from '../layout/FeedbackFormWrapper';
+import FormWrapper from '../layout/FormWrapper';
+import FormItem from '../components/FormItem';
 import Dropdown from '../components/Dropdown';
 import Button from '../components/Button';
 import { submitSuggestion } from '../features/suggestions/suggestionThunks';
@@ -16,9 +17,8 @@ function FeedbackForm() {
   const [requestErr, setRequestErr] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
+  const loc = useLocation();
   const dispatch = useDispatch();
-
-  const onCategoryChange = val => setCategory(val);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -49,7 +49,7 @@ function FeedbackForm() {
     dispatch(submitSuggestion({ title, description, category }))
       .unwrap()
       .then(id => {
-        navigate(`/feedback/${id}`);
+        navigate(`/feedback/${id}`, { replace: true });
       })
       .catch(err => {
         setRequestErr(err);
@@ -60,50 +60,53 @@ function FeedbackForm() {
   };
 
   return (
-    <form className="fb-form" onSubmit={handleSubmit}>
-      {requestErr && <span className="fb-form__req-err">{requestErr}</span>}
-      <div className="fb-form__item">
-        <label htmlFor="fb-title">Feedback Title</label>
-        <p>Add a short, descriptive headline</p>
-        <input
-          type="text"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          id="fb-title"
-        />
-        <span className="fb-form__err">{titleErr}</span>
-      </div>
+    <form className="form" onSubmit={handleSubmit}>
+      {requestErr && <span className="form__req-err">{requestErr}</span>}
+      <FormItem
+        id="fb-title"
+        label="Feedback Title"
+        desc="Add a short, descriptive headline"
+        val={title}
+        setVal={setTitle}
+        err={titleErr}
+      />
       <div>
         <Dropdown
           label="Category"
           description="Choose a category for your feedback"
           options={categories}
           selected={category}
-          setSelected={onCategoryChange}
+          setSelected={setCategory}
           disabled={false}
           type="b"
         />
-        <span className="fb-form__err">&nbsp;</span>
+        <span className="form__err">&nbsp;</span>
       </div>
-      <div className="fb-form__item">
+      <div className="form__item">
         <label htmlFor="fb-description">Feedback Detail</label>
         <p>
           Include any specific comments on what should be improved, added, etc.
         </p>
         <textarea
+          className={`form__input${descriptiontErr ? ' form__input--err' : ''}`}
           value={description}
           onChange={e => setDescription(e.target.value)}
           id="fb-description"
         />
-        <span className="fb-form__err">{descriptiontErr}</span>
+        <span className="form__err">{descriptiontErr}</span>
       </div>
-      <div className="fb-form__btns fb-form__btns--create">
+      <div className="form__btns form__btns--2">
         <Button
           label="Add Feedback"
           disabled={disabled}
           onSubmit={handleSubmit}
         />
-        <Button to="/" label="Cancel" disabled={disabled} color="dark" />
+        <Button
+          to={loc.state?.prevPage || '/'}
+          label="Cancel"
+          disabled={disabled}
+          color="dark"
+        />
       </div>
     </form>
   );
@@ -111,9 +114,9 @@ function FeedbackForm() {
 
 function NewFeedback() {
   return (
-    <FeedbackFormWrapper backLink="/" title="Create New Feedback" type="create">
+    <FormWrapper title="Create New Feedback" type="create">
       <FeedbackForm />
-    </FeedbackFormWrapper>
+    </FormWrapper>
   );
 }
 

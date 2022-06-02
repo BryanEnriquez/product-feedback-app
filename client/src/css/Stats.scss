@@ -23,12 +23,27 @@
     color: $color-blue-dark;
   }
 
-  a {
-    font-size: 1.3rem;
-    font-weight: 600;
-    line-height: 1.9rem;
-    text-decoration-line: underline;
-    color: $color-blue;
+  &__link {
+    &:link,
+    &:visited {
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.9rem;
+      text-decoration-line: underline;
+      color: $color-blue;
+      transition: color 0.2s;
+    }
+
+    @media (min-width: $media-m) {
+      &:hover,
+      &:active {
+        color: #8397f8;
+      }
+    }
+
+    &--none {
+      opacity: 0.25;
+    }
   }
 
   ul {

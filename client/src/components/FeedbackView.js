@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Feedback from './Feedback';
 import Button from './Button';
 import BackLink from './BackLink';
+import ErrorMsg from './ErrorMsg';
+import Loader from './Loader';
 import { fetchOneSuggestion } from '../features/suggestions/suggestionThunks';
+import { findInvalidFbId } from '../features/user/currentUserSlice';
 import '../css/FeedbackView.scss';
 
 const SingleFeedback = ({ currentUser, feedback }) => {
@@ -12,13 +15,19 @@ const SingleFeedback = ({ currentUser, feedback }) => {
   const [error, setError] = useState(null);
   const urlParams = useParams();
   const dispatch = useDispatch();
+  const deleted = useSelector(state =>
+    findInvalidFbId(state, urlParams.productRequestId)
+  );
 
   useEffect(() => {
-    if (feedback || status !== 'idle') return;
+    if (feedback || status !== 'idle' || currentUser === null || deleted)
+      return;
 
     setStatus('pending');
 
-    dispatch(fetchOneSuggestion(urlParams.productRequestId))
+    dispatch(
+      fetchOneSuggestion({ id: urlParams.productRequestId, currentUser })
+    )
       .unwrap()
       .then(() => {
         setStatus('fulfilled');
@@ -27,7 +36,15 @@ const SingleFeedback = ({ currentUser, feedback }) => {
         setStatus('rejected');
         setError(err);
       });
-  }, [feedback, status, dispatch, urlParams.productRequestId]);
+  }, [
+    feedback,
+    status,
+    setError,
+    currentUser,
+    deleted,
+    dispatch,
+    urlParams.productRequestId,
+  ]);
 
   if (feedback) {
     return (
@@ -36,29 +53,38 @@ const SingleFeedback = ({ currentUser, feedback }) => {
         dispatch={dispatch}
         currentUser={currentUser}
         group={false}
+        prevPage={`/feedback/${feedback.productRequestId}`}
       />
     );
   } else if (status === 'rejected') {
-    return <div>{error}</div>;
+    return <ErrorMsg msg={error} />;
+  } else if (deleted) {
+    return <ErrorMsg msg="This suggestion no longer exists!" />;
   }
 
-  // TODO
-  return <div>Loading...</div>;
+  return <Loader />;
 };
 
 function FeedbackView({ currentUser, feedback }) {
   const renderBtn =
     currentUser && feedback && currentUser.accountUid === feedback.accountUid;
 
+  const backLink = feedback
+    ? feedback.status === 'suggestion'
+      ? '/'
+      : '/roadmap'
+    : '/';
+
   return (
     <div className="fb-view">
       <div className="fb-view__nav">
-        <BackLink />
+        <BackLink customLink={backLink} />
         {renderBtn && (
           <Button
             to={`/edit-feedback/${feedback.productRequestId}`}
             label="Edit Feedback"
             color="blue"
+            prevPage={`/feedback/${feedback.productRequestId}`}
           />
         )}
       </div>

@@ -3,7 +3,12 @@ import {
   createEntityAdapter,
   createSelector,
 } from '@reduxjs/toolkit';
-import { fetchSuggestions, addOneSuggestion } from './suggestionThunks';
+import {
+  fetchSuggestions,
+  addOneSuggestion,
+  removeOneSuggestion,
+  updateOneSuggestion,
+} from './suggestionThunks';
 
 const suggestionsAdapter = createEntityAdapter({
   selectId: suggestion => suggestion.productRequestId,
@@ -28,6 +33,17 @@ const initialState = suggestionsAdapter.getInitialState({
   error: null,
   canLoadMore: false,
 });
+
+const calculateTotal = entities => {
+  const total = { all: 0, ui: 0, ux: 0, bug: 0, feature: 0, enhancement: 0 };
+
+  for (const fbId in entities) {
+    total.all++;
+    total[entities[fbId].category]++;
+  }
+
+  return total;
+};
 
 const suggestionsSlice = createSlice({
   name: 'suggestions',
@@ -56,15 +72,9 @@ const suggestionsSlice = createSlice({
         state.page++;
         state.results = results;
 
-        Object.keys(state.total).forEach(key => {
-          state.total[key] = 0;
-        });
-
         suggestionsAdapter.setMany(state, data);
-        Object.values(state.entities).forEach(el => {
-          state.total.all++;
-          state.total[el.category]++;
-        });
+
+        state.total = calculateTotal(state.entities);
 
         state.loaded = state.ids.length;
 
@@ -79,11 +89,18 @@ const suggestionsSlice = createSlice({
 
         state.total.all++;
         state.total[action.payload.category]++;
-        // state.total = { all: 0, ui: 0, ux: 0, bug: 0, feature: 0, enhancement: 0 };
-        // Object.values(state.entities).forEach(el => {
-        //   state.total.all++;
-        //   state.total[el.category]++;
-        // });
+      })
+      .addCase(removeOneSuggestion, (state, action) => {
+        const { productRequestId: id, category } = action.payload;
+
+        suggestionsAdapter.removeOne(state, id);
+
+        state.total.all--;
+        state.total[category]--;
+      })
+      .addCase(updateOneSuggestion, (state, action) => {
+        suggestionsAdapter.setOne(state, action.payload);
+        state.total = calculateTotal(state.entities);
       });
   },
 });

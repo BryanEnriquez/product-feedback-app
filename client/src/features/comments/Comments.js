@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Comment from './Comment';
 import Button from '../../components/Button';
@@ -17,6 +18,7 @@ function Comments({ currentUser, feedback }) {
   const comments = useSelector(selectAllComments);
   const totalComments = useSelector(selectTotalComments);
   const lastViewedFb = useSelector(selectLastViewedFb);
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const canLoadMore = totalComments < feedback?.comments;
@@ -67,6 +69,7 @@ function Comments({ currentUser, feedback }) {
               key={el.commentId}
               comment={el}
               currentUser={currentUser}
+              prevPage={location.pathname}
             />
           ))}
       </div>

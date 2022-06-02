@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import Button from './Button';
+import NewFbBtn from './NewFbBtn';
 import SuggestionsCounter from './SuggestionsCounter';
 import SuggestionsDropdown from '../features/suggestions/SuggestionsDropdown';
 import { selectCurrentUser } from '../features/user/currentUserSlice';
@@ -14,10 +14,7 @@ function SortTab() {
         <SuggestionsCounter />
         <SuggestionsDropdown />
       </div>
-      <Button
-        to={user ? '/new-feedback' : user === null ? '/' : '/login'}
-        label="+ Add Feedback"
-      />
+      <NewFbBtn currentUser={user} />
     </div>
   );
 }

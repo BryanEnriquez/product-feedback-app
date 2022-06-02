@@ -1,32 +1,43 @@
 @import './variables';
 
 .back-link {
-  font-size: 1.3rem;
-  font-weight: 700;
-  border: 0;
-  color: $color-blue-grey;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  transition: text-decoration 5s;
+  &:link,
+  &:visited {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.9rem;
+    background-color: transparent;
 
-  @media (min-width: $media-m) {
-    font-size: 1.4rem;
-    line-height: 2rem;
+    @media (min-width: $media-m) {
+      font-size: 1.4rem;
+      line-height: 2rem;
+    }
+  }
 
-    &:hover {
-      cursor: pointer;
+  &:hover {
+    @media (min-width: $media-m) {
       text-decoration: underline;
     }
   }
 
-  &::before {
-    display: inline-block;
-    width: 0.7rem;
-    height: 1rem;
+  &--blue {
+    color: $color-blue-grey;
+  }
+
+  &--white {
+    color: $color-white;
+
+    & > svg > path {
+      stroke: $color-white;
+    }
+  }
+
+  svg {
+    pointer-events: none;
     margin-right: 13px;
-    content: '';
-    background-image: url(../images/shared/icon-arrow-left.svg);
-    background-size: cover;
+    height: 1rem;
+    width: 0.7rem;
   }
 }

@@ -19,15 +19,23 @@ const trimText = text => {
   return `${text.substring(0, 72)}${text.length > 72 ? '..' : ''}`;
 };
 
-function Feedback({ item, dispatch, currentUser, group }) {
+function Feedback({
+  item,
+  dispatch,
+  currentUser,
+  group = true,
+  type = 'a',
+  prevPage,
+}) {
   const [reqStatus, setReqStatus] = useState('idle');
+  const [err, setErr] = useState(false);
   const upvote = useSelector(state =>
     selectByUpvoteId(state, item.productRequestId)
   );
   const navigate = useNavigate();
 
   const onUpvoteClick = async () => {
-    if (!currentUser) return navigate('/login');
+    if (!currentUser) return navigate('/login', { state: { prevPage } });
     // Return if in progress or request for upvote data failed
     if (reqStatus !== 'idle' || upvote.upvoted === null) return;
 
@@ -38,31 +46,29 @@ function Feedback({ item, dispatch, currentUser, group }) {
       } else {
         await dispatch(upvoteAdded(upvote.productRequestId)).unwrap();
       }
-    } catch (err) {
-      // TODO
-      console.log('Upvote error: ', err);
-    } finally {
       setTimeout(() => setReqStatus('idle'), 1000);
+    } catch (err) {
+      setErr(true);
     }
   };
 
-  const classes = cn('feedback__content', {
-    'feedback__content--g': group,
-  });
-
-  const content = (
+  const copy = (
     <>
       <h3>{item.title}</h3>
       <p>{group ? trimText(item.description) : item.description}</p>
       <div>{tags[item.category]}</div>
     </>
   );
+  const copyCn = cn('feedback__copy', `feedback__copy--${type}`, {
+    'feedback__copy--g': group,
+  });
 
   return (
-    <li className="feedback">
+    <div className={`feedback feedback--${type}`}>
       <button
-        className={cn('feedback__upvotes', {
+        className={cn('feedback__upvotes', `feedback__upvotes--${type}`, {
           'feedback__upvotes--upvoted': upvote.upvoted || false,
+          'feedback__upvotes--err': err,
         })}
         onClick={onUpvoteClick}
       >
@@ -70,21 +76,23 @@ function Feedback({ item, dispatch, currentUser, group }) {
         {upvote.upvotes}
       </button>
       {group ? (
-        <Link to={`/feedback/${item.productRequestId}`} className={classes}>
-          {content}
+        <Link
+          to={`/feedback/${item.productRequestId}`}
+          state={{ prevPage }}
+          className={copyCn}
+        >
+          {copy}
         </Link>
       ) : (
-        <div className={classes}>{content}</div>
+        <div className={copyCn}>{copy}</div>
       )}
-      <div className="feedback__comments">
+      <div className={`feedback__comments feedback__comments--${type}`}>
         <span {...(!item.comments && { className: 'none' })}>
           {item.comments}
         </span>
       </div>
-    </li>
+    </div>
   );
 }
-
-Feedback.defaultProps = { group: true };
 
 export default Feedback;

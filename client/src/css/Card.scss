@@ -1,0 +1,75 @@
+@import './variables';
+
+@mixin before-bg-color($mod, $color) {
+  &--#{$mod} {
+    &::before {
+      background-color: $color;
+    }
+
+    & > span::before {
+      background-color: $color;
+    }
+  }
+}
+
+.card {
+  padding: 22px 24px 24px 24px;
+  position: relative;
+  background-color: $color-white;
+  border-radius: 5px 5px 10px 10px;
+  overflow: hidden;
+
+  @media (min-width: $media-m) {
+    padding: 26px 20px 24px 20px;
+    border-radius: 5px;
+  }
+  @media (min-width: $media-l) {
+    padding: 31px 32px 32px 32px;
+  }
+
+  & > span {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+    color: $color-blue-grey;
+    margin-bottom: 16px;
+
+    @media (min-width: $media-m) {
+      margin-bottom: 14px;
+    }
+    @media (min-width: $media-l) {
+      margin-bottom: 8px;
+      font-size: 1.6rem;
+      line-height: 2.3rem;
+    }
+
+    &::before {
+      display: inline-block;
+      content: '';
+      height: 8px;
+      width: 8px;
+      margin-right: 8px;
+      border-radius: 50%;
+
+      @media (min-width: $media-m) {
+        margin-right: 16px;
+      }
+    }
+  }
+
+  &::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    height: 6px;
+    width: 100%;
+  }
+
+  @include before-bg-color('orange', $color-orange);
+  @include before-bg-color('violet', $color-violet);
+  @include before-bg-color('blue', $color-blue-light);
+}

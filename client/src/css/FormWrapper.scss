@@ -1,20 +1,25 @@
 @import './variables';
 
-.fb-form-wrapper {
+.form-wrapper {
   margin: 34px 0 77px 0;
   padding: 0 24px;
   color: $color-blue-dark;
 
   @media (min-width: $media-m) {
-    margin: 56px auto;
+    margin: 56px auto 122px;
     max-width: 54rem;
     padding: 0;
   }
   @media (min-width: $media-l) {
-    margin: 92px auto;
+    margin: 92px auto 129px;
   }
 
-  & > div {
+  &__backlink {
+    display: flex;
+    justify-content: left;
+  }
+
+  &__main {
     position: relative;
     margin-top: 55px;
     padding: 44px 24px 24px 24px;
@@ -64,10 +69,14 @@
 }
 
 .icon--edit {
-  background-image: url(../images/shared/icon-new-feedback.svg);
+  background-image: url(../images/shared/icon-edit-feedback.svg);
 }
 
-.fb-form {
+.icon--signup {
+  background-image: url(../images/shared/icon-signup.svg);
+}
+
+.form {
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: auto;
@@ -78,6 +87,7 @@
   }
 
   &__req-err {
+    display: block;
     margin-bottom: 12px;
     font-size: 1.6rem;
     line-height: 2.3rem;
@@ -89,6 +99,16 @@
       font-size: 2rem;
       line-height: 2.9rem;
       letter-spacing: 0.33px;
+    }
+  }
+
+  &__success {
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+
+    @media (min-width: $media-m) {
+      font-size: 1.5rem;
+      line-height: 2.2rem;
     }
   }
 
@@ -137,10 +157,6 @@
     &:focus {
       border: 1px solid $color-blue;
     }
-
-    &.error {
-      border: 1px solid $color-red;
-    }
   }
 
   input {
@@ -166,13 +182,47 @@
     }
   }
 
+  & &__input.form__input--err {
+    border-color: red;
+  }
+
   &__err {
+    min-height: 1.9rem;
     color: $color-red;
 
     @media (min-width: $media-m) {
       font-size: 1.4rem;
       min-height: 2rem;
     }
+  }
+
+  &__toggle-item {
+    margin: 12px 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+    justify-items: start;
+    align-items: center;
+
+    label {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.18px;
+      justify-self: start;
+
+      @media (min-width: $media-m) {
+        font-size: 1.4rem;
+        line-height: 2rem;
+        letter-spacing: 0.194px;
+      }
+    }
+  }
+
+  input[type='checkbox'] {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2px;
   }
 
   &__btns {
@@ -194,7 +244,15 @@
     }
   }
 
-  &__btns--create {
+  &__btns--1 {
+    max-width: 16rem;
+
+    @media (min-width: $media-m) {
+      max-width: 18rem;
+    }
+  }
+
+  &__btns--2 {
     grid-template-rows: auto auto;
 
     @media (min-width: $media-m) {
@@ -209,7 +267,7 @@
     }
   }
 
-  &__btns--edit {
+  &__btns--3 {
     grid-template-rows: repeat(3, auto);
 
     @media (min-width: $media-m) {

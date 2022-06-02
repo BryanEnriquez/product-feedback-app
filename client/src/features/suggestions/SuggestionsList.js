@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Feedback from '../../components/Feedback';
+import Button from '../../components/Button';
+import NoContent from '../../components/NoContent';
+import ErrorMsg from '../../components/ErrorMsg';
 import {
   selectCategory,
   selectCanLoadMore,
@@ -39,9 +42,13 @@ function SuggestionsList() {
   let content;
 
   if (fetchStatus === 'rejected') {
-    content = `An error occured: $${error}`;
-  } else if (!filteredList.length && fetchStatus === 'fulfilled') {
-    content = 'There appears to be nothing here!';
+    content = <ErrorMsg msg={error} />;
+  } else if (
+    !filteredList.length &&
+    fetchStatus === 'fulfilled' &&
+    !isLoadBtnVisible
+  ) {
+    content = <NoContent currentUser={currentUser} />;
   } else {
     // 'idle' or 'fulfilled'
     const sortedList = filteredList.slice().sort(sorters[sortBy]);
@@ -52,23 +59,24 @@ function SuggestionsList() {
         item={el}
         dispatch={dispatch}
         currentUser={currentUser}
+        prevPage={'/'}
       />
     ));
   }
 
-  const showLoadMoreBtn = category === 'all' && isLoadBtnVisible;
+  const showLoadMoreBtn = category === 'all' && isLoadBtnVisible && !error;
 
   return (
     <div className="sl-wrapper">
-      <ul className="sl">{content}</ul>
+      <div className="sl">{content}</div>
       <br />
       {showLoadMoreBtn && (
-        <button
+        <Button
           disabled={fetchStatus !== 'fulfilled'}
           onClick={() => dispatch(fetchSuggestions())}
-        >
-          Load more results
-        </button>
+          label="Load More Suggestions"
+          color="blue"
+        />
       )}
     </div>
   );
