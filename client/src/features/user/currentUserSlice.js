@@ -56,6 +56,15 @@ const currentUserSlice = createSlice({
     addInvalidFbId: (state, action) => {
       state.invalidFbIds[action.payload] = true;
     },
+    updateBasicInfo: (state, action) => {
+      const { firstName, lastName } = action.payload;
+
+      state.user.firstName = firstName;
+      state.user.lastName = lastName;
+    },
+    updateUserImg: (state, action) => {
+      state.user.profileImg = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -78,7 +87,8 @@ const currentUserSlice = createSlice({
 export default currentUserSlice.reducer;
 
 ///// Action creators /////
-export const { addInvalidFbId } = currentUserSlice.actions;
+export const { addInvalidFbId, updateBasicInfo, updateUserImg } =
+  currentUserSlice.actions;
 
 ///// Selectors /////
 export const selectCurrentUser = state => state.currentUser.user;

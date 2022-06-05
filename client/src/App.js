@@ -11,6 +11,7 @@ import Login from './routes/Login';
 import Signup from './routes/Signup';
 import ActivateAccount from './routes/ActivateAccount';
 import EditFeedback from './routes/EditFeedback';
+import Settings from './routes/Settings';
 import Scroller from './components/Scroller';
 import './App.scss';
 
@@ -44,6 +45,14 @@ function App() {
               <RequireNoAuth>
                 <ActivateAccount />
               </RequireNoAuth>
+            }
+          />
+          <Route
+            path="settings"
+            element={
+              <RequireAuth>
+                <Settings />
+              </RequireAuth>
             }
           />
           <Route path="feedback/:productRequestId" element={<FeedbackPage />} />

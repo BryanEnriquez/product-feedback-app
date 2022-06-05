@@ -24,7 +24,9 @@ export const fetchComments = createAsyncThunk(
 
       return { comments: data.data.comments, id, nextPage: page + 1 };
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.response.data.message);
+      return thunkAPI.rejectWithValue(
+        err.response.data?.message || 'Unable to load comments.'
+      );
     }
   }
 );
@@ -56,7 +58,9 @@ export const postComment = createAsyncThunk(
 
       return comment;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.response.data.message);
+      return thunkAPI.rejectWithValue(
+        err.response.data?.message || 'Failed to create comment.'
+      );
     }
   }
 );

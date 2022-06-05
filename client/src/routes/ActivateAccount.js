@@ -38,7 +38,7 @@ function ActivateAccount() {
       <div className="acc-activate__backlink">
         <BackLink replace={true} />
       </div>
-      <main className="acc-activate__main">
+      <div className="acc-activate__main">
         <h1>Account Activation</h1>
         <p>Status: {status !== 'idle' && status}</p>
         <p>
@@ -51,7 +51,7 @@ function ActivateAccount() {
         {status === 'Complete' && (
           <Button to="/login" label="Log In" color="blue" replace={true} />
         )}
-      </main>
+      </div>
     </div>
   );
 }

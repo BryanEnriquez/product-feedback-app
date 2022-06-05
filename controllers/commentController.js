@@ -23,6 +23,7 @@ exports.createComment = catchAsync(async (req, res, next) => {
     {
       content: req.body.content,
       author: [req.user.username, req.user.fullName],
+      authorImg: req.user.profileImg,
       accountUid: req.user.accountUid,
       productRequestId:
         req.body.productRequestId || req.params.productRequestId,

@@ -1,4 +1,13 @@
-function FormItem({ id, label, desc, val, setVal, err, type = 'text' }) {
+function FormItem({
+  id,
+  label,
+  desc,
+  val,
+  setVal,
+  err,
+  disabled = false,
+  type = 'text',
+}) {
   return (
     <div className="form__item">
       <label htmlFor={id}>{label}</label>
@@ -9,6 +18,7 @@ function FormItem({ id, label, desc, val, setVal, err, type = 'text' }) {
         value={val}
         onChange={e => setVal(e.target.value)}
         id={id}
+        disabled={disabled}
       />
       <span className="form__err">{err}</span>
     </div>

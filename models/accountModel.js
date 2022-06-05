@@ -77,6 +77,7 @@ class Account extends Model {
       'email',
       'role',
       'passwordChangedAt',
+      'profileImg',
     ];
   }
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import cn from 'classnames';
 import Header from '../layout/Header';
-import SessionLink from '../features/user/SessionLink';
+import SessionLinks from '../features/user/SessionLinks';
 import Filter from '../components/Filter';
 import Stats from '../components/Stats';
 import SortTab from '../components/SortTab';
@@ -23,7 +23,7 @@ const SideTab = () => {
       />
       <div className={cn('home__menu', { 'home__menu--hidden': !open })}>
         <div className="home__menu-box">
-          <SessionLink className="home__login" />
+          <SessionLinks />
           <Filter />
           <Stats />
         </div>

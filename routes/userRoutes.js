@@ -33,6 +33,15 @@ router.patch(
   authController.updatePassword
 );
 
+router.get('/sign-s3', userController.signProfileImg);
+
+router.patch(
+  '/updateProfileImg',
+  userController.setIdParam,
+  userController.setUserProfileImg,
+  userController.updateProfileImg
+);
+
 router.use(authController.adminOnly);
 
 router

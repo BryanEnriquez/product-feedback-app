@@ -1,3 +1,6 @@
+const { PutObjectCommand } = require('@aws-sdk/client-s3');
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+const { s3Client } = require('../config/aws/s3Client');
 const Account = require('../models/accountModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -50,6 +53,45 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     .status(204)
     .json({ status: 'success', data: null });
 });
+
+const createUserImgPath = (user, full = false) =>
+  `${
+    full ? `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/` : ''
+  }users/${user.accountUid}-avatar.jpg`;
+
+exports.signProfileImg = catchAsync(async (req, res, next) => {
+  const fileName = createUserImgPath(req.user);
+
+  const command = new PutObjectCommand({
+    Bucket: process.env.S3_BUCKET_NAME,
+    Key: fileName,
+    ContentType: 'image/jpeg',
+  });
+
+  try {
+    const signedRequest = await getSignedUrl(s3Client, command, {
+      expiresIn: 60,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: { signedRequest },
+    });
+  } catch (_) {
+    return next(new AppError('Error reaching image host.', 500));
+  }
+});
+
+exports.setUserProfileImg = (req, res, next) => {
+  req.body.profileImg = createUserImgPath(req.user, true);
+  next();
+};
+
+exports.updateProfileImg = factory.updateOne(
+  Account,
+  ['profileImg'],
+  ['profile_img']
+);
 
 // Admin only:
 

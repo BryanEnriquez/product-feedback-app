@@ -107,31 +107,4 @@
       background-color: $color-white;
     }
   }
-
-  &__login {
-    padding: 10px 24px;
-    text-align: center;
-
-    @media (min-width: $media-m) {
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform: translateY(calc(-100% - 5px));
-    }
-    @media (min-width: $media-l) {
-      position: relative;
-      transform: none;
-    }
-
-    a {
-      display: inline-block;
-      font-size: 1.6rem;
-      font-weight: 600;
-      line-height: 1;
-      letter-spacing: 0.25px;
-      color: $color-blue;
-      padding: 0 0 0 1px;
-      border-bottom: 1px solid $color-blue;
-    }
-  }
 }

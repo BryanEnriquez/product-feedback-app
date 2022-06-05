@@ -40,6 +40,10 @@ Comment.init(
       type: DataTypes.ARRAY(DataTypes.STRING(32)),
       allowNull: false,
     },
+    authorImg: {
+      field: 'author_img',
+      type: DataTypes.STRING,
+    },
     deleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

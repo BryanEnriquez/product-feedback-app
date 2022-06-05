@@ -175,7 +175,9 @@ export const updateFeedback = createAsyncThunk(
         dispatch(updateOneRmSuggestion(newFb));
       }
     } catch (err) {
-      rejectWithValue(err.response.data.message);
+      rejectWithValue(
+        err.response.data?.message || 'Failed to update feedback.'
+      );
     }
   }
 );
@@ -195,7 +197,9 @@ export const deleteFeedback = createAsyncThunk(
           : removeOneRmSuggestion)(feedback)
       );
     } catch (err) {
-      rejectWithValue(err.response.data.message);
+      rejectWithValue(
+        err.response.data?.message || 'Failed to delete feedback.'
+      );
     }
   }
 );

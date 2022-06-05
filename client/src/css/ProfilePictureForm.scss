@@ -1,0 +1,58 @@
+@import './variables';
+
+.profile-pic-wrapper {
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px;
+}
+
+.profile-imgs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 10px;
+  justify-items: center;
+
+  figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  figcaption {
+    margin-top: 12px;
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+    text-align: center;
+    color: $color-blue-grey;
+  }
+
+  img {
+    display: block;
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+
+    &.img-circle {
+      border-radius: 50%;
+    }
+  }
+}
+
+@media (min-width: $media-m) {
+  .profile-imgs {
+    figcaption {
+      font-size: 1.4rem;
+      line-height: 2rem;
+    }
+  }
+}
+
+@media (min-width: $media-l) {
+  .profile-imgs {
+    padding: 24px;
+  }
+}
