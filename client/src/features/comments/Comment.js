@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import ReplyForm from './ReplyForm';
-// Temporary
-import userImg from '../../images/user-images/user.png';
+import { getAvatarUrl } from '../../utils/s3UserUrl';
+import defaultImg from '../../images/user-images/default-avatar.png';
 import '../../css/Comment.scss';
 
 function Comment({ comment, currentUser, prevPage }) {
@@ -29,7 +29,12 @@ function Comment({ comment, currentUser, prevPage }) {
     >
       <div className="comment__content">
         <div className="comment__grid">
-          <img src={userImg} alt="user img" />
+          <img
+            src={
+              comment.authorImg ? getAvatarUrl(comment.authorImg) : defaultImg
+            }
+            alt={`${comment.author[1]}'s profile pic`}
+          />
           <div className="comment__user">
             <h2>{comment.author[1]}</h2>
             <span>@{comment.author[0]}</span>

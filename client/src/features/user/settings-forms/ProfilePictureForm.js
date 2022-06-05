@@ -4,6 +4,7 @@ import axios from 'axios';
 import Button from '../../../components/Button';
 import ImgFigure from '../../../components/ImgFigure';
 import { updateUserImg } from '../currentUserSlice';
+import { getAvatarUrl } from '../../../utils/s3UserUrl';
 import noSelectionImg from '../../../images/shared/icon-missing-file.svg';
 import '../../../css/ProfilePictureForm.scss';
 
@@ -108,7 +109,7 @@ function ProfilePictureForm({ currentUser, setOptionLocked }) {
     <div className="profile-pic-wrapper">
       <div className="profile-imgs">
         <ImgFigure
-          src={profileSrc}
+          src={profileSrc ? getAvatarUrl(profileSrc) : ''}
           alt={`${currentUser.firstName}'s current profile picture`}
           caption="Current image"
           circle={currentUser.profileImg}

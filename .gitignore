@@ -2,9 +2,11 @@ node_modules
 
 dev-data/testDataPWs.json
 
+dev-data/user-images
+
 # local configuration
 config.env
 # for db string
-.env
+/.env
 
 note.txt

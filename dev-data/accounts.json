@@ -15,7 +15,8 @@
     "email": "demouser001@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "cbcdad5d-2839-4723-ad76-969c8128c3ec"
+    "accountUid": "cbcdad5d-2839-4723-ad76-969c8128c3ec",
+    "profileImg": "cbcdad5d-2839-4723-ad76-969c8128c3ec-avatar.jpg"
   },
   {
     "username": "upbeat1811",
@@ -24,7 +25,8 @@
     "email": "demouser002@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "442fa3de-55d6-4f5a-bb37-b0cc8757a466"
+    "accountUid": "442fa3de-55d6-4f5a-bb37-b0cc8757a466",
+    "profileImg": "442fa3de-55d6-4f5a-bb37-b0cc8757a466-avatar.jpg"
   },
   {
     "username": "brawnybrave",
@@ -33,7 +35,8 @@
     "email": "demouser003@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "456cb95e-9093-46ee-a8bf-1412f78ddf3c"
+    "accountUid": "456cb95e-9093-46ee-a8bf-1412f78ddf3c",
+    "profileImg": "456cb95e-9093-46ee-a8bf-1412f78ddf3c-avatar.jpg"
   },
   {
     "username": "hexagon.bestagon",
@@ -42,7 +45,8 @@
     "email": "demouser004@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "1f085735-8857-4443-931f-cb1cbf6f21fb"
+    "accountUid": "1f085735-8857-4443-931f-cb1cbf6f21fb",
+    "profileImg": "1f085735-8857-4443-931f-cb1cbf6f21fb-avatar.jpg"
   },
   {
     "username": "hummingbird1",
@@ -51,7 +55,8 @@
     "email": "demouser005@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "fc053f3e-20ac-4ea7-841b-6cd59a793cfe"
+    "accountUid": "fc053f3e-20ac-4ea7-841b-6cd59a793cfe",
+    "profileImg": "fc053f3e-20ac-4ea7-841b-6cd59a793cfe-avatar.jpg"
   },
   {
     "username": "annev1990",
@@ -60,7 +65,8 @@
     "email": "demouser006@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "586ad0fb-e11b-4e8b-a0e5-568c2e0293a2"
+    "accountUid": "586ad0fb-e11b-4e8b-a0e5-568c2e0293a2",
+    "profileImg": "586ad0fb-e11b-4e8b-a0e5-568c2e0293a2-avatar.jpg"
   },
   {
     "username": "voyager.344",
@@ -69,7 +75,8 @@
     "email": "demouser007@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "2c06ca74-8650-4cfb-a1cd-8cc5f4fedeb5"
+    "accountUid": "2c06ca74-8650-4cfb-a1cd-8cc5f4fedeb5",
+    "profileImg": "2c06ca74-8650-4cfb-a1cd-8cc5f4fedeb5-avatar.jpg"
   },
   {
     "username": "soccerviewer8",
@@ -78,7 +85,8 @@
     "email": "demouser008@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "2a69e064-5175-4216-9ec9-ef9642f2870c"
+    "accountUid": "2a69e064-5175-4216-9ec9-ef9642f2870c",
+    "profileImg": "2a69e064-5175-4216-9ec9-ef9642f2870c-avatar.jpg"
   },
   {
     "username": "warlikeduke",
@@ -87,7 +95,8 @@
     "email": "demouser009@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "b0892ac3-bcf7-4029-a37a-a16388ffd777"
+    "accountUid": "b0892ac3-bcf7-4029-a37a-a16388ffd777",
+    "profileImg": "b0892ac3-bcf7-4029-a37a-a16388ffd777-avatar.jpg"
   },
   {
     "username": "peppersprime32",
@@ -96,7 +105,8 @@
     "email": "demouser010@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "ee1f68d3-f3e7-42c5-97a5-e22507a5e676"
+    "accountUid": "ee1f68d3-f3e7-42c5-97a5-e22507a5e676",
+    "profileImg": "ee1f68d3-f3e7-42c5-97a5-e22507a5e676-avatar.jpg"
   },
   {
     "username": "arlen_the_marlin",
@@ -105,7 +115,8 @@
     "email": "demouser011@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "f87e90d3-1e27-4292-86c2-1439c4f5953e"
+    "accountUid": "f87e90d3-1e27-4292-86c2-1439c4f5953e",
+    "profileImg": "f87e90d3-1e27-4292-86c2-1439c4f5953e-avatar.jpg"
   },
   {
     "username": "countryspirit",
@@ -114,6 +125,7 @@
     "email": "demouser012@example.com",
     "role": "demo user",
     "active": true,
-    "accountUid": "eb47654a-84c2-418f-80ac-5aaee8e30339"
+    "accountUid": "eb47654a-84c2-418f-80ac-5aaee8e30339",
+    "profileImg": "eb47654a-84c2-418f-80ac-5aaee8e30339-avatar.jpg"
   }
 ]

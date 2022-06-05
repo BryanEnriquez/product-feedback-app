@@ -54,17 +54,10 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     .json({ status: 'success', data: null });
 });
 
-const createUserImgPath = (user, full = false) =>
-  `${
-    full ? `https://${process.env.S3_BUCKET_NAME}.s3.amazonaws.com/` : ''
-  }users/${user.accountUid}-avatar.jpg`;
-
 exports.signProfileImg = catchAsync(async (req, res, next) => {
-  const fileName = createUserImgPath(req.user);
-
   const command = new PutObjectCommand({
     Bucket: process.env.S3_BUCKET_NAME,
-    Key: fileName,
+    Key: `${req.user.accountUid}-avatar.jpg`,
     ContentType: 'image/jpeg',
   });
 
@@ -83,7 +76,8 @@ exports.signProfileImg = catchAsync(async (req, res, next) => {
 });
 
 exports.setUserProfileImg = (req, res, next) => {
-  req.body.profileImg = createUserImgPath(req.user, true);
+  req.body.profileImg = `${req.user.accountUid}-avatar.jpg`;
+
   next();
 };
 
