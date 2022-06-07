@@ -1,11 +1,11 @@
-// const path = require('path');
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-// const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
-// const compression = require('compression');
-// const helmet = require('./config/helmetConfig');
+const compression = require('compression');
 
+const helmet = require('./config/helmetConfig');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const userRouter = require('./routes/userRoutes');
@@ -18,9 +18,9 @@ const app = express();
 
 app.enable('trust proxy');
 
-// app.use(helmet);
-
 if (process.env.NODE_ENV === 'production') {
+  app.use(helmet);
+
   app.use((req, res, next) => {
     if (req.secure || req.headers['x-forwarded-proto'] === 'https')
       return next();
@@ -36,11 +36,19 @@ if (process.env.NODE_ENV === 'dev') app.use(morgan('dev'));
 app.use(express.json({ limit: '20kb' }));
 app.use(cookieParser());
 
-// app.use(compression());
+if (process.env.NODE_ENV === 'production') {
+  app.use(compression());
 
-app.get('/', (req, res, next) => {
-  res.status(200).json({ message: 'test' });
-});
+  app.use(
+    '/api',
+    rateLimit({
+      max: 300,
+      windowMs: 15 * 60 * 1000, // 300 requests / 15 mins
+      standardHeaders: true,
+      message: 'Too many requests from this IP, try again later.',
+    })
+  );
+}
 
 // API
 app.use('/api/v1/users', userRouter);
@@ -49,7 +57,15 @@ app.use('/api/v1/productRequests', productRequestRouter);
 app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/upvotes', upvoteRouter);
 
-app.use('*', (req, res, next) => {
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+  app.get('*', (req, res, next) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+app.all('*', (req, res, next) => {
   const err = new AppError(
     `${req.originalUrl} does not exist on this server`,
     404

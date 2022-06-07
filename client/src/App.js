@@ -13,6 +13,7 @@ import ActivateAccount from './routes/ActivateAccount';
 import EditFeedback from './routes/EditFeedback';
 import Settings from './routes/Settings';
 import Scroller from './components/Scroller';
+import NotFound from './routes/NotFound';
 import './App.scss';
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
             }
           />
           <Route path="roadmap" element={<RoadmapPage />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -118,7 +118,7 @@ exports.resendActivationToken = catchAsync(async (req, res, next) => {
 
       const url = `${req.protocol}://${req.get(
         'host'
-      )}/account-activation/${activationToken}`;
+      )}/activate-account/${activationToken}`;
 
       // Send email
       await new Email(user, url).resendActivationToken();
