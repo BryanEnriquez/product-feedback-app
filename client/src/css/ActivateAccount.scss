@@ -33,7 +33,7 @@
     }
 
     .link {
-      margin: 14px auto 0 auto;
+      margin: 16px auto 0 auto;
       max-width: 16rem;
     }
   }
@@ -63,6 +63,10 @@
         margin-top: 6px;
         font-size: 1.5rem;
         line-height: 2.2rem;
+      }
+
+      .link {
+        margin-top: 20px;
       }
     }
   }

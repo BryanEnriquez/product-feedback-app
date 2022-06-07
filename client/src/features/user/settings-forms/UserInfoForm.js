@@ -15,11 +15,9 @@ function UserInfoForm({ currentUser, setOptionLocked }) {
   const [reqErr, setReqErr] = useState(null);
   const dispatch = useDispatch();
 
-  const disabled = currentUser.role === 'demo user';
-
   const handleSubmit = e => {
     e.preventDefault();
-    if (status !== 'idle' || disabled) return;
+    if (status !== 'idle') return;
 
     let err = false;
 
@@ -83,11 +81,6 @@ function UserInfoForm({ currentUser, setOptionLocked }) {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
-      {disabled && (
-        <span className="form__notice">
-          This feature is restricted to regular users.
-        </span>
-      )}
       {reqErr && <span className="form__req-err">{reqErr}</span>}
       <FormItem
         id="first-name"
@@ -96,7 +89,6 @@ function UserInfoForm({ currentUser, setOptionLocked }) {
         val={firstName}
         setVal={setFirstName}
         err={firstNameErr}
-        disabled={disabled}
       />
       <FormItem
         id="last-name"
@@ -105,17 +97,16 @@ function UserInfoForm({ currentUser, setOptionLocked }) {
         val={lastName}
         setVal={setLastName}
         err={lastNameErr}
-        disabled={disabled}
       />
       <div className="form__btns form__btns--2">
         <Button
           label="Update"
-          disabled={status !== 'idle' || disabled}
+          disabled={status !== 'idle'}
           onSubmit={handleSubmit}
         />
         <Button
           label="Reset"
-          disabled={status !== 'idle' || disabled}
+          disabled={status !== 'idle'}
           onClick={handleReset}
           color="dark"
         />

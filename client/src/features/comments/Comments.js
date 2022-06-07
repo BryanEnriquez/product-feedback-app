@@ -38,6 +38,7 @@ function Comments({ currentUser, feedback }) {
     if (!feedback || status !== 'idle') return;
 
     setStatus('pending');
+    setDisabled(true);
 
     let args = { id: feedback.productRequestId };
 
@@ -48,11 +49,14 @@ function Comments({ currentUser, feedback }) {
             args.reset = true;
             await dispatch(fetchComments(args)).unwrap();
           }
+          setStatus('fulfilled');
+          setDisabled(false);
           return;
         } else {
           await dispatch(fetchComments(args)).unwrap();
         }
         setStatus('fulfilled');
+        setDisabled(false);
       } catch (err) {
         setErr(err);
       }

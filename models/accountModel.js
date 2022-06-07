@@ -225,18 +225,23 @@ Account.init(
   }
 );
 
+// Reminder - Execution order for beforeSave:
+// save: validators > beforeSave, update: beforeSave > validators
 Account.addHook('beforeSave', async function (user, options) {
   // changed() is TRUE for new instances and for updates involving this field
   if (!user.changed('password')) return;
 
   user.password = await bcrypt.hash(user.password, 12);
-  user.passwordConfirm = null;
 
   // If not new and updated: set changed at
   if (user.isNewRecord) return;
 
   options.fields.push('passwordChangedAt');
   user.passwordChangedAt = Date.now() - 1000;
+});
+
+Account.addHook('afterSave', (user) => {
+  if (user.changed('password')) user.passwordConfirm = null;
 });
 
 Account.addHook('beforeSave', async function (user, options) {
@@ -248,7 +253,7 @@ Account.addHook('beforeSave', async function (user, options) {
 
   const token = (await aRandomBytes(32)).toString('hex');
 
-  user.emailToken = token;
+  user.emailToken = token; // Doesn't exist on model but used by controller
   user.activationToken = crypto
     .createHash('sha256')
     .update(token)

@@ -10,7 +10,7 @@ const Email = require('../utils/email');
 const asyncSign = promisify(jwt.sign);
 const asyncVerify = promisify(jwt.verify);
 
-const createSendToken = async (req, res, statusCode, user) => {
+const createSendToken = async (res, statusCode, user, includeUser = true) => {
   const token = await asyncSign(
     { id: user.accountUid },
     process.env.JWT_SECRET,
@@ -27,7 +27,7 @@ const createSendToken = async (req, res, statusCode, user) => {
 
   res.status(statusCode).json({
     status: 'success',
-    data: { user: user.getCoreFields() },
+    ...(includeUser && { data: { user: user.getCoreFields() } }),
   });
 };
 
@@ -157,7 +157,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError('Incorrect login credentials.', 401));
   }
 
-  await createSendToken(req, res, 200, user);
+  await createSendToken(res, 200, user);
 });
 
 exports.logout = (req, res, next) => {
@@ -334,7 +334,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     passwordResetExpires: null,
   });
 
-  await createSendToken(req, res, 200, user);
+  await createSendToken(res, 200, user);
 });
 // End of account recovery logic //////
 
@@ -361,5 +361,5 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   await user.update({ password, passwordConfirm });
 
-  await createSendToken(req, res, 200, user);
+  await createSendToken(res, 200, user, false);
 });

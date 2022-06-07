@@ -24,6 +24,7 @@ function Login() {
   useEffect(() => {
     setEmail(demoUser.email);
     setPw(demoUser.pw);
+    setShowPassword(false);
   }, [demoUser]);
 
   const onLoginClick = async e => {
@@ -101,8 +102,8 @@ function Login() {
             <label htmlFor="pw-checkbox">Show password</label>
             <input
               type="checkbox"
-              value={showPassword}
-              onClick={() => setShowPassword(!showPassword)}
+              checked={showPassword}
+              onChange={() => setShowPassword(!showPassword)}
               id="pw-checkbox"
             />
           </div>

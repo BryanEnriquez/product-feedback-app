@@ -10,7 +10,7 @@ function Settings() {
   const [optionLocked, setOptionLocked] = useState(false);
   const currentUser = useSelector(selectCurrentUser);
 
-  const Form = option.Form;
+  const { Form } = option;
 
   return (
     <div className="settings">

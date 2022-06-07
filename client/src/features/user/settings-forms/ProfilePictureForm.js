@@ -130,7 +130,7 @@ function ProfilePictureForm({ currentUser, setOptionLocked }) {
       <form className="form" onSubmit={handleSubmit} ref={formRef}>
         {reqErr && <span className="form__req-err">{reqErr}</span>}
         <div className="form__item">
-          <label htmlFor="profile-pic-preview">Upload an image</label>
+          <label htmlFor="profile-pic-preview">Upload An Image</label>
           <p>Accepted format(s): jpg/jpeg. Max size: 50 KB.</p>
           <input
             type="file"

@@ -99,6 +99,7 @@ function SignupForm({ setSignupComplete }) {
     setPwErr(null);
     setPasswordConfirm('');
     setPwConfirmErr(null);
+    setShowPw(false);
   };
 
   return (
@@ -158,8 +159,8 @@ function SignupForm({ setSignupComplete }) {
         <label htmlFor="show-password">Show password</label>
         <input
           type="checkbox"
-          value={showPw}
-          onClick={() => setShowPw(!showPw)}
+          checked={showPw}
+          onChange={() => setShowPw(!showPw)}
           id="show-password"
         />
       </div>
