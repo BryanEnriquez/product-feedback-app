@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import axios from 'axios';
 import FormWrapper from '../layout/FormWrapper';
 import FormItem from '../components/FormItem';
 import Button from '../components/Button';
 import validators from '../config/signupValidators';
+import ax from '../utils/axios';
 
 function SignupForm({ setSignupComplete }) {
   const [username, setUsername] = useState('');
@@ -62,15 +62,14 @@ function SignupForm({ setSignupComplete }) {
     setDisabled(true);
     setReqErr(null);
 
-    axios
-      .post(`${process.env.REACT_APP_API}/users/signup`, {
-        username,
-        firstName,
-        lastName,
-        email,
-        password,
-        passwordConfirm,
-      })
+    ax.post('/users/signup', {
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+      passwordConfirm,
+    })
       .then(() => setSignupComplete(true))
       .catch(err => {
         setStatus('idle');

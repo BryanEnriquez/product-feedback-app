@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import axios from 'axios';
 import FormItem from '../../../components/FormItem';
 import Button from '../../../components/Button';
 import validators from '../../../config/signupValidators';
+import ax from '../../../utils/axios';
 
 function UpdatePasswordForm({ currentUser, setOptionLocked }) {
   const [passwordCurrent, setPasswordCurrent] = useState('');
@@ -70,12 +70,11 @@ function UpdatePasswordForm({ currentUser, setOptionLocked }) {
     setOptionLocked(true);
     setStatus('pending');
 
-    axios
-      .patch(`${process.env.REACT_APP_API}/users/updateMyPassword`, {
-        passwordCurrent: currentPwInput,
-        password,
-        passwordConfirm,
-      })
+    ax.patch('/users/updateMyPassword', {
+      passwordCurrent: currentPwInput,
+      password,
+      passwordConfirm,
+    })
       .then(_ => {
         resetForm();
         setMsg('Password was successfully updated!');

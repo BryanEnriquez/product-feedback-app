@@ -15,7 +15,9 @@ module.exports = helmet({
       'connect-src': [
         "'self'",
         'https://api.product-feedback-app.com',
+        // For manual reload using fetch
         'https://product-feedback-app.s3.amazonaws.com',
+        // For PUT request using signed url request
         'https://product-feedback-app.s3.us-east-1.amazonaws.com',
       ],
     },

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import Button from '../components/Button';
 import BackLink from '../components/BackLink';
+import ax from '../utils/axios';
 import '../css/ActivateAccount.scss';
 
 function ActivateAccount() {
@@ -16,10 +16,9 @@ function ActivateAccount() {
 
     setStatus('In-progress');
 
-    axios
-      .patch(`${process.env.REACT_APP_API}/users/activateAccount`, {
-        token: params.token,
-      })
+    ax.patch('/users/activateAccount', {
+      token: params.token,
+    })
       .then(res => {
         setStatus('Complete');
         setMsg(res.data.message);

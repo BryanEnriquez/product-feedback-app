@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
 import FormItem from '../../../components/FormItem';
 import Button from '../../../components/Button';
 import { updateBasicInfo } from '../currentUserSlice';
 import validators from '../../../config/signupValidators';
+import ax from '../../../utils/axios';
 
 function UserInfoForm({ currentUser, setOptionLocked }) {
   const [firstName, setFirstName] = useState(currentUser.firstName);
@@ -50,8 +50,7 @@ function UserInfoForm({ currentUser, setOptionLocked }) {
     setStatus('pending');
     setReqErr(null);
 
-    axios
-      .patch(`${process.env.REACT_APP_API}/users/me`, { firstName, lastName })
+    ax.patch('/users/me', { firstName, lastName })
       .then(res => {
         const { firstName, lastName } = res.data.data.data;
 
