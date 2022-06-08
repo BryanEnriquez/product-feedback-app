@@ -4,6 +4,7 @@ import axios from 'axios';
 import Button from '../../../components/Button';
 import ImgFigure from '../../../components/ImgFigure';
 import { updateUserImg } from '../currentUserSlice';
+import ax from '../../../utils/axios';
 import { getAvatarUrl } from '../../../utils/s3UserUrl';
 import noSelectionImg from '../../../images/shared/icon-missing-file.svg';
 import '../../../css/ProfilePictureForm.scss';
@@ -45,8 +46,7 @@ function ProfilePictureForm({ currentUser, setOptionLocked }) {
 
     let res;
     try {
-      res = (await axios.get(`${process.env.REACT_APP_API}/users/sign-s3`)).data
-        .data;
+      res = (await ax.get('/users/sign-s3')).data.data;
     } catch (err) {
       unlock();
       return setReqErr(getErr(err));
@@ -62,9 +62,7 @@ function ProfilePictureForm({ currentUser, setOptionLocked }) {
     }
 
     try {
-      const { data } = await axios.patch(
-        `${process.env.REACT_APP_API}/users/updateProfileImg`
-      );
+      const { data } = await ax.patch('/users/updateProfileImg');
 
       const { profileImg } = data.data.data;
 

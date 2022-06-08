@@ -1,11 +1,11 @@
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { addFetchedUpvotes } from '../upvotes/upvotesSlice';
 import { addOneRmSuggestion } from '../roadmap/roadmapSlice';
 import {
   removeOneRmSuggestion,
   updateOneRmSuggestion,
 } from '../roadmap/roadmapExtras';
+import ax from '../../utils/axios';
 
 export const addOneSuggestion = createAction('suggestions/addOneSuggestion');
 
@@ -22,17 +22,14 @@ export const fetchSuggestions = createAsyncThunk(
   async (_, thunkAPI) => {
     const { page } = thunkAPI.getState().suggestions;
 
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/productRequests`,
-      {
-        params: {
-          productId: 1,
-          status: 'suggestion',
-          page,
-          limit: 4,
-        },
-      }
-    );
+    const { data } = await ax.get('/productRequests', {
+      params: {
+        productId: 1,
+        status: 'suggestion',
+        page,
+        limit: 4,
+      },
+    });
 
     const results = data.data.data;
 
@@ -55,12 +52,10 @@ export const fetchOneSuggestion = createAsyncThunk(
   async ({ id, currentUser }, thunkAPI) => {
     const requests = [];
 
-    requests.push(
-      axios.get(`${process.env.REACT_APP_API}/productRequests/${id}`)
-    );
+    requests.push(ax.get(`/productRequests/${id}`));
     if (currentUser)
       requests.push(
-        axios.get(`${process.env.REACT_API}/upvotes/user`, {
+        ax.get('/upvotes/user', {
           params: { ids: id },
         })
       );
@@ -107,15 +102,12 @@ export const submitSuggestion = createAsyncThunk(
   'suggestions/submitSuggestion',
   async ({ title, description, category }, thunkAPI) => {
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/productRequests`,
-        {
-          productId: 1,
-          title,
-          description,
-          category: category.label.toLowerCase(),
-        }
-      );
+      const { data } = await ax.post('/productRequests', {
+        productId: 1,
+        title,
+        description,
+        category: category.label.toLowerCase(),
+      });
 
       const newSuggestion = data.data.data;
 
@@ -144,8 +136,8 @@ export const updateFeedback = createAsyncThunk(
   'suggestions/updateFeedback',
   async ({ prevFb, updatedFb }, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await axios.patch(
-        `${process.env.REACT_APP_API}/productRequests/${prevFb.productRequestId}`,
+      const { data } = await ax.patch(
+        `/productRequests/${prevFb.productRequestId}`,
         {
           title: updatedFb.title,
           description: updatedFb.description,
@@ -198,10 +190,9 @@ export const deleteFeedback = createAsyncThunk(
   'suggestions/deleteFeedback',
   async (feedback, { dispatch, rejectWithValue }) => {
     try {
-      await axios.delete(
-        `${process.env.REACT_APP_API}/productRequests/${feedback.productRequestId}`,
-        { data: { accountUid: feedback.accountUid } }
-      );
+      await ax.delete(`/productRequests/${feedback.productRequestId}`, {
+        data: { accountUid: feedback.accountUid },
+      });
 
       dispatch(
         (feedback.status === 'suggestion'

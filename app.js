@@ -32,6 +32,7 @@ const corsOptions = {
     if (whitelist.indexOf(origin) !== -1 || !origin) cb(null, true);
     else cb(new AppError('Not allowed by CORS'), 400);
   },
+  credentials: true,
 };
 
 const CORS = process.env.NODE_ENV === 'production' ? cors(corsOptions) : cors();

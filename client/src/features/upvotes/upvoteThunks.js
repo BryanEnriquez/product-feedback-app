@@ -1,10 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import ax from '../../utils/axios';
 
 export const upvoteAdded = createAsyncThunk('upvotes/upvoteAdded', async id => {
-  await axios.post(`${process.env.REACT_APP_API}/upvotes`, {
-    productRequestId: id,
-  });
+  await ax.post('/upvotes', { productRequestId: id });
 
   return id;
 });
@@ -12,7 +10,7 @@ export const upvoteAdded = createAsyncThunk('upvotes/upvoteAdded', async id => {
 export const upvoteRemoved = createAsyncThunk(
   'upvotes/upvoteRemoved',
   async id => {
-    await axios.delete(`${process.env.REACT_APP_API}/upvotes`, {
+    await ax.delete('/upvotes', {
       data: { productRequestId: id },
     });
 

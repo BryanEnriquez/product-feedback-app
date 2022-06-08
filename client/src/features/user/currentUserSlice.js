@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { resetSuggestState } from '../suggestions/suggestionsSlice';
 import { resetRoadmapState } from '../roadmap/roadmapSlice';
+import ax from '../../utils/axios';
 
 const FEATURE = 'currentUser';
 
@@ -15,9 +15,7 @@ const initialState = {
 export const fetchCurrentUser = createAsyncThunk(
   `${FEATURE}/fetchCurrentUser`,
   async () => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_API}/users/loginStatus`
-    );
+    const { data } = await ax.get('/users/loginStatus');
 
     return data.user || false;
   }
@@ -27,13 +25,10 @@ export const login = createAsyncThunk(
   `${FEATURE}/login`,
   async ({ email, password }, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/users/login`,
-        {
-          email,
-          password,
-        }
-      );
+      const { data } = await ax.post('/users/login', {
+        email,
+        password,
+      });
 
       // Reset data
       dispatch(resetSuggestState());
@@ -49,7 +44,7 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk(`${FEATURE}/logout`, async () => {
-  await axios.get(`${process.env.REACT_APP_API}/users/logout`);
+  await ax.get('/users/logout');
 
   return null;
 });

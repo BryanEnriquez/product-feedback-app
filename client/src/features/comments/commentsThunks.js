@@ -1,7 +1,7 @@
 import { createAsyncThunk, createAction } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { incSuggestCommentCount } from '../suggestions/suggestionsSlice';
 import { incRoadmapCommentCount } from '../roadmap/roadmapSlice';
+import ax from '../../utils/axios';
 
 export const calculateCommentStats = createAction(
   'comments/calculateCommentStats'
@@ -15,10 +15,9 @@ export const fetchComments = createAsyncThunk(
     const page = reset ? 1 : thunkAPI.getState().comments.page;
 
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/productRequests/${id}/comments`,
-        { params: { page, limit: 5 } }
-      );
+      const { data } = await ax.get(`/productRequests/${id}/comments`, {
+        params: { page, limit: 5 },
+      });
 
       if (reset) thunkAPI.dispatch(resetComments());
 
@@ -40,14 +39,11 @@ export const postComment = createAsyncThunk(
     if (!feedback) feedback = state.roadmap.entities[productRequestId];
 
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/comments`,
-        {
-          content,
-          productRequestId,
-          ...(parentId && { parentId }),
-        }
-      );
+      const { data } = await ax.post('/comments', {
+        content,
+        productRequestId,
+        ...(parentId && { parentId }),
+      });
 
       thunkAPI.dispatch(
         (feedback.status === 'suggestion'
