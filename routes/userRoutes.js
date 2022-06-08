@@ -23,8 +23,8 @@ router
   .route('/me')
   .all(userController.setIdParam)
   .get(userController.getMe)
-  .all(authController.nonDemoOnly)
   .patch(userController.updateMe)
+  .all(authController.nonDemoOnly)
   .delete(userController.deleteMe);
 
 router.patch(

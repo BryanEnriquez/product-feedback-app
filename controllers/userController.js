@@ -26,8 +26,8 @@ exports.getMe = factory.getOne(Account, {
 
 exports.updateMe = factory.updateOne(
   Account,
-  ['firstName', 'lastName', 'email'],
-  ['account_uid', 'first_name', 'last_name', 'email']
+  ['firstName', 'lastName'],
+  ['account_uid', 'first_name', 'last_name']
 );
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
