@@ -167,6 +167,7 @@ exports.logout = (req, res, next) => {
   res.clearCookie('jwt', {
     httpOnly: true,
     secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+    ...(env === 'production' && { domain: '.product-feedback-app.com' }),
   });
 
   res.status(200).json({ status: 'success' });
