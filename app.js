@@ -29,8 +29,7 @@ const whitelist = [
 
 const corsOptions = {
   origin: (origin, cb) => {
-    console.log('origin: ', origin);
-    if (whitelist.indexOf(origin) !== -1) cb(null, true);
+    if (whitelist.indexOf(origin) !== -1 || !origin) cb(null, true);
     else cb(new AppError('Not allowed by CORS'), 400);
   },
 };
