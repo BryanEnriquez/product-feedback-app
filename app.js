@@ -20,7 +20,7 @@ const app = express();
 app.enable('trust proxy');
 
 const whitelist = [
-  'http://www.product-feedback-app.com',
+  'https://www.product-feedback-app.com',
   'https://product-feedback-webapp.herokuapp.com',
 ];
 
