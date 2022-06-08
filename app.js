@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const helmet = require('./config/helmetConfig');
 const AppError = require('./utils/appError');
@@ -17,6 +18,23 @@ const upvoteRouter = require('./routes/upvoteRoutes');
 const app = express();
 
 app.enable('trust proxy');
+
+const whitelist = [
+  'http://www.product-feedback-app.com',
+  'https://product-feedback-webapp.herokuapp.com',
+];
+
+const corsOptions = {
+  origin: (origin, cb) => {
+    if (whitelist.indexOf(origin) !== -1) cb(null, true);
+    else cb(new AppError('Not allowed by CORS'), 400);
+  },
+};
+
+const CORS = process.env.NODE_ENV === 'production' ? cors(corsOptions) : cors();
+
+app.use(CORS);
+app.options('*', CORS);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(helmet);

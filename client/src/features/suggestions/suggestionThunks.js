@@ -22,14 +22,17 @@ export const fetchSuggestions = createAsyncThunk(
   async (_, thunkAPI) => {
     const { page } = thunkAPI.getState().suggestions;
 
-    const { data } = await axios.get('/api/v1/productRequests', {
-      params: {
-        productId: 1,
-        status: 'suggestion',
-        page,
-        limit: 4,
-      },
-    });
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/productRequests`,
+      {
+        params: {
+          productId: 1,
+          status: 'suggestion',
+          page,
+          limit: 4,
+        },
+      }
+    );
 
     const results = data.data.data;
 
@@ -52,9 +55,15 @@ export const fetchOneSuggestion = createAsyncThunk(
   async ({ id, currentUser }, thunkAPI) => {
     const requests = [];
 
-    requests.push(axios.get(`/api/v1/productRequests/${id}`));
+    requests.push(
+      axios.get(`${process.env.REACT_APP_API}/productRequests/${id}`)
+    );
     if (currentUser)
-      requests.push(axios.get('/api/v1/upvotes/user', { params: { ids: id } }));
+      requests.push(
+        axios.get(`${process.env.REACT_API}/upvotes/user`, {
+          params: { ids: id },
+        })
+      );
 
     const [suggestion, upvote] = await Promise.allSettled(requests);
 
@@ -98,12 +107,15 @@ export const submitSuggestion = createAsyncThunk(
   'suggestions/submitSuggestion',
   async ({ title, description, category }, thunkAPI) => {
     try {
-      const { data } = await axios.post('/api/v1/productRequests', {
-        productId: 1,
-        title,
-        description,
-        category: category.label.toLowerCase(),
-      });
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API}/productRequests`,
+        {
+          productId: 1,
+          title,
+          description,
+          category: category.label.toLowerCase(),
+        }
+      );
 
       const newSuggestion = data.data.data;
 
@@ -133,7 +145,7 @@ export const updateFeedback = createAsyncThunk(
   async ({ prevFb, updatedFb }, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios.patch(
-        `/api/v1/productRequests/${prevFb.productRequestId}`,
+        `${process.env.REACT_APP_API}/productRequests/${prevFb.productRequestId}`,
         {
           title: updatedFb.title,
           description: updatedFb.description,
@@ -187,7 +199,7 @@ export const deleteFeedback = createAsyncThunk(
   async (feedback, { dispatch, rejectWithValue }) => {
     try {
       await axios.delete(
-        `/api/v1/productRequests/${feedback.productRequestId}`,
+        `${process.env.REACT_APP_API}/productRequests/${feedback.productRequestId}`,
         { data: { accountUid: feedback.accountUid } }
       );
 

@@ -17,7 +17,7 @@ function ActivateAccount() {
     setStatus('In-progress');
 
     axios
-      .patch('/api/v1/users/activateAccount', {
+      .patch(`${process.env.REACT_APP_API}/users/activateAccount`, {
         token: params.token,
       })
       .then(res => {

@@ -45,7 +45,8 @@ function ProfilePictureForm({ currentUser, setOptionLocked }) {
 
     let res;
     try {
-      res = (await axios.get('/api/v1/users/sign-s3')).data.data;
+      res = (await axios.get(`${process.env.REACT_APP_API}/users/sign-s3`)).data
+        .data;
     } catch (err) {
       unlock();
       return setReqErr(getErr(err));
@@ -61,7 +62,9 @@ function ProfilePictureForm({ currentUser, setOptionLocked }) {
     }
 
     try {
-      const { data } = await axios.patch('/api/v1/users/updateProfileImg');
+      const { data } = await axios.patch(
+        `${process.env.REACT_APP_API}/users/updateProfileImg`
+      );
 
       const { profileImg } = data.data.data;
 

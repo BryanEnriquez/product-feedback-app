@@ -51,7 +51,7 @@ function UserInfoForm({ currentUser, setOptionLocked }) {
     setReqErr(null);
 
     axios
-      .patch('/api/v1/users/me', { firstName, lastName })
+      .patch(`${process.env.REACT_APP_API}/users/me`, { firstName, lastName })
       .then(res => {
         const { firstName, lastName } = res.data.data.data;
 

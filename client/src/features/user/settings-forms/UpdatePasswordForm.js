@@ -71,7 +71,7 @@ function UpdatePasswordForm({ currentUser, setOptionLocked }) {
     setStatus('pending');
 
     axios
-      .patch('/api/v1/users/updateMyPassword', {
+      .patch(`${process.env.REACT_APP_API}/users/updateMyPassword`, {
         passwordCurrent: currentPwInput,
         password,
         passwordConfirm,

@@ -7,7 +7,15 @@ module.exports = helmet({
     useDefaults: true,
     directives: {
       'script-src': scriptSrc,
-      'img-src': ["'self'", 'https://product-feedback-app.s3.amazonaws.com'],
+      'img-src': [
+        "'self'",
+        'blob:',
+        'https://product-feedback-app.s3.amazonaws.com',
+      ],
+      'connect-src': [
+        "'self'",
+        'https://product-feedback-app.s3.us-east-1.amazonaws.com',
+      ],
     },
   },
   crossOriginEmbedderPolicy: false,

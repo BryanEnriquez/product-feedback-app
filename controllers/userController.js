@@ -57,7 +57,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 exports.signProfileImg = catchAsync(async (req, res, next) => {
   const command = new PutObjectCommand({
     Bucket: process.env.S3_BUCKET_NAME,
-    Key: `${req.user.accountUid}-avatar.jpg`,
+    Key: `users/${req.user.accountUid}-avatar.jpg`,
     ContentType: 'image/jpeg',
   });
 

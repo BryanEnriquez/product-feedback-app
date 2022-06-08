@@ -15,7 +15,9 @@ const initialState = {
 export const fetchCurrentUser = createAsyncThunk(
   `${FEATURE}/fetchCurrentUser`,
   async () => {
-    const { data } = await axios.get('/api/v1/users/loginStatus');
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/users/loginStatus`
+    );
 
     return data.user || false;
   }
@@ -25,10 +27,13 @@ export const login = createAsyncThunk(
   `${FEATURE}/login`,
   async ({ email, password }, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/api/v1/users/login', {
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API}/users/login`,
+        {
+          email,
+          password,
+        }
+      );
 
       // Reset data
       dispatch(resetSuggestState());
@@ -44,7 +49,7 @@ export const login = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk(`${FEATURE}/logout`, async () => {
-  await axios.get('/api/v1/users/logout');
+  await axios.get(`${process.env.REACT_APP_API}/users/logout`);
 
   return null;
 });

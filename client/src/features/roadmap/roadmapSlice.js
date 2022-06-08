@@ -47,14 +47,17 @@ export const fetchRmSuggestions = createAsyncThunk(
   async (_, thunkAPI) => {
     const { page } = thunkAPI.getState().roadmap;
 
-    const { data } = await axios.get('/api/v1/productRequests', {
-      params: {
-        productId: 1,
-        'status[ne]': 'suggestion',
-        page,
-        limit: 4,
-      },
-    });
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/productRequests`,
+      {
+        params: {
+          productId: 1,
+          'status[ne]': 'suggestion',
+          page,
+          limit: 4,
+        },
+      }
+    );
 
     const results = data.data.data;
 
@@ -75,7 +78,7 @@ export const fetchRmSuggestions = createAsyncThunk(
 export const fetchRmSummary = createAsyncThunk(
   'roadmap/fetchRmSummary',
   async () => {
-    const { data } = await axios.get('/api/v1/products/1');
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/products/1`);
     return data.data.data;
   }
 );

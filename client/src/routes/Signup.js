@@ -63,7 +63,7 @@ function SignupForm({ setSignupComplete }) {
     setReqErr(null);
 
     axios
-      .post('/api/v1/users/signup', {
+      .post(`${process.env.REACT_APP_API}/users/signup`, {
         username,
         firstName,
         lastName,

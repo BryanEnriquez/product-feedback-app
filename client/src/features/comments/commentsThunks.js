@@ -16,8 +16,8 @@ export const fetchComments = createAsyncThunk(
 
     try {
       const { data } = await axios.get(
-        `/api/v1/productRequests/${id}/comments`,
-        { params: { page, limit: 1 } }
+        `${process.env.REACT_APP_API}/productRequests/${id}/comments`,
+        { params: { page, limit: 5 } }
       );
 
       if (reset) thunkAPI.dispatch(resetComments());
@@ -40,11 +40,14 @@ export const postComment = createAsyncThunk(
     if (!feedback) feedback = state.roadmap.entities[productRequestId];
 
     try {
-      const { data } = await axios.post('/api/v1/comments', {
-        content,
-        productRequestId,
-        ...(parentId && { parentId }),
-      });
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API}/comments`,
+        {
+          content,
+          productRequestId,
+          ...(parentId && { parentId }),
+        }
+      );
 
       thunkAPI.dispatch(
         (feedback.status === 'suggestion'
