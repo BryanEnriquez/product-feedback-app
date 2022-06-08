@@ -19,13 +19,17 @@ const app = express();
 
 app.enable('trust proxy');
 
+const EDGE = process.env.EDGE_URL;
+
 const whitelist = [
   'https://www.product-feedback-app.com',
+  EDGE,
   'https://product-feedback-webapp.herokuapp.com',
 ];
 
 const corsOptions = {
   origin: (origin, cb) => {
+    console.log('origin: ', origin);
     if (whitelist.indexOf(origin) !== -1) cb(null, true);
     else cb(new AppError('Not allowed by CORS'), 400);
   },
