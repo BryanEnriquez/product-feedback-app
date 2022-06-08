@@ -11,6 +11,7 @@ const asyncSign = promisify(jwt.sign);
 const asyncVerify = promisify(jwt.verify);
 
 const env = process.env.NODE_ENV;
+const DOMAIN = process.env.DOMAIN;
 
 const createSendToken = async (res, statusCode, user, includeUser = true) => {
   const token = await asyncSign(
@@ -47,9 +48,9 @@ exports.signup = catchAsync(async (req, res, next) => {
     returning: ['*'],
   });
 
-  const url = `${req.protocol}://${req.get('host')}/activate-account/${
-    newUser.emailToken
-  }`;
+  const url = `${req.protocol}://${
+    env === 'production' ? DOMAIN : req.get('host')
+  }/activate-account/${newUser.emailToken}`;
 
   new Email(newUser, url).sendWelcome().catch((_) => {
     console.log(`ERROR: Failed to send email to ${newUser.email}`);
@@ -119,9 +120,9 @@ exports.resendActivationToken = catchAsync(async (req, res, next) => {
         transaction: t,
       });
 
-      const url = `${req.protocol}://${req.get(
-        'host'
-      )}/activate-account/${activationToken}`;
+      const url = `${req.protocol}://${
+        env === 'production' ? DOMAIN : req.get('host')
+      }/activate-account/${activationToken}`;
 
       // Send email
       await new Email(user, url).resendActivationToken();
@@ -278,9 +279,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   await user.save();
 
   try {
-    const resetURL = `${req.protocol}://${req.get(
-      'host'
-    )}/account-recovery/${resetToken}`;
+    const resetURL = `${req.protocol}://${
+      env === 'production' ? DOMAIN : req.get('host')
+    }/account-recovery/${resetToken}`;
 
     await new Email(user, resetURL).sendPasswordReset();
 
