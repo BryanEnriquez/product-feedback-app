@@ -10,6 +10,8 @@ const Email = require('../utils/email');
 const asyncSign = promisify(jwt.sign);
 const asyncVerify = promisify(jwt.verify);
 
+const env = process.env.NODE_ENV;
+
 const createSendToken = async (res, statusCode, user, includeUser = true) => {
   const token = await asyncSign(
     { id: user.accountUid },
@@ -23,6 +25,7 @@ const createSendToken = async (res, statusCode, user, includeUser = true) => {
     ),
     httpOnly: true,
     secure: process.env.NODE_ENV !== 'dev',
+    ...(env === 'production' && { domain: '.product-feedback-app.com' }),
   });
 
   res.status(statusCode).json({
