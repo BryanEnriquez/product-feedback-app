@@ -16,6 +16,7 @@ module.exports = helmet({
         "'self'",
         'https://api.product-feedback-app.com',
         'https://product-feedback-app.s3.amazonaws.com',
+        'https://product-feedback-app.s3.us-east-1.amazonaws.com',
       ],
     },
   },
