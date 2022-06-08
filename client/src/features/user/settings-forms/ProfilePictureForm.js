@@ -75,7 +75,8 @@ function ProfilePictureForm({ currentUser, setOptionLocked }) {
       // Clear src to force img rerender later
       setProfileSrc('');
 
-      fetch(profileImg, { cache: 'reload', mode: 'cors' })
+      console.log('returned profileImg: ', profileImg);
+      fetch(getAvatarUrl(profileImg), { cache: 'reload', mode: 'cors' })
         .then(_ => setProfileSrc(profileImg))
         .catch(_ =>
           setReqErr('Failed to reload image, try reloading the page.')

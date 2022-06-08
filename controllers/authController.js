@@ -24,7 +24,7 @@ const createSendToken = async (res, statusCode, user, includeUser = true) => {
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
     httpOnly: true,
-    secure: process.env.NODE_ENV !== 'dev',
+    secure: env !== 'dev',
     ...(env === 'production' && { domain: '.product-feedback-app.com' }),
   });
 
@@ -166,7 +166,7 @@ exports.login = catchAsync(async (req, res, next) => {
 exports.logout = (req, res, next) => {
   res.clearCookie('jwt', {
     httpOnly: true,
-    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+    secure: env !== 'dev',
     ...(env === 'production' && { domain: '.product-feedback-app.com' }),
   });
 
