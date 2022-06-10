@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setSort } from './suggestionsSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSort, selectSortBy } from './suggestionsSlice';
 import Dropdown from '../../components/Dropdown';
 
 const options = [
@@ -11,19 +10,15 @@ const options = [
 ];
 
 function SuggestionsDropdown() {
-  const [selected, setSelected] = useState(options[0]);
+  const sortOption = useSelector(selectSortBy);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setSort(selected.id));
-  }, [selected, dispatch]);
 
   return (
     <Dropdown
       label="Sort by :"
       options={options}
-      selected={selected}
-      setSelected={setSelected}
+      selected={sortOption}
+      setSelected={newOption => dispatch(setSort(newOption))}
       type="a"
     />
   );

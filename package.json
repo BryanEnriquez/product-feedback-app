@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/BryanEnriquez/product-feedback-app#readme",
   "dependencies": {
+    "@aws-sdk/client-cloudfront": "^3.107.0",
     "@aws-sdk/client-s3": "^3.100.0",
     "@aws-sdk/s3-request-presigner": "^3.100.0",
     "bcryptjs": "^2.4.3",

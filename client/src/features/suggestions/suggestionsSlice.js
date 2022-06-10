@@ -27,7 +27,7 @@ const initialState = suggestionsAdapter.getInitialState({
     feature: 0,
     enhancement: 0,
   },
-  sortBy: 'most_upvotes',
+  sortBy: { id: 'most_upvotes', label: 'Most Upvotes' },
   category: 'all',
   status: 'idle',
   error: null,
@@ -120,6 +120,7 @@ export const selectSuggestFetchStatus = state => state.suggestions.status;
 export const selectError = state => state.suggestions.error;
 export const selectCategory = state => state.suggestions.category;
 export const selectSortBy = state => state.suggestions.sortBy;
+export const selectSortOptionId = state => selectSortBy(state).id;
 export const selectCounters = state => state.suggestions.total;
 export const selectCanLoadMore = state => state.suggestions.canLoadMore;
 export const selectSuggestionsTotals = state => state.suggestions.total.all;

@@ -9,7 +9,7 @@ import {
   selectCanLoadMore,
   selectSuggestFetchStatus,
   selectError,
-  selectSortBy,
+  selectSortOptionId,
   selectFilteredList,
 } from './suggestionsSlice';
 import { fetchSuggestions } from './suggestionThunks';
@@ -26,7 +26,7 @@ const sorters = {
 function SuggestionsList() {
   const currentUser = useSelector(selectCurrentUser);
   const isLoadBtnVisible = useSelector(selectCanLoadMore);
-  const sortBy = useSelector(selectSortBy);
+  const sortBy = useSelector(selectSortOptionId);
   const category = useSelector(selectCategory);
   const filteredList = useSelector(state =>
     selectFilteredList(state, category)

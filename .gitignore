@@ -1,5 +1,7 @@
 node_modules
 
+config/aws/cloudfront.js
+
 dev-data/testDataPWs.json
 
 dev-data/user-images
