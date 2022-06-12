@@ -2,7 +2,7 @@
 
 ## Description
 
-This is my solution to one of the challenges on [frontendmentor.io](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6). The starter resources included some demo data (found in `dev-data/data.json`), site text for each page, and image assets (favicon, user avatars, background images, svgs). Additionally, the design to replicate was provided in a figma file. The only requirement was to implement the feature list described in the next section. Otherwise, the tech stack, architecture, front-end only vs full-stack app came down to personal preference. The [live site can be viewed by following this link](https://www.product-feedback.app.com).
+This is my solution to one of the challenges on [frontendmentor.io](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6). The starter resources included some demo data (found in `dev-data/data.json`), site text for each page, and image assets (favicon, user avatars, background images, svgs). Additionally, the design to replicate was provided in a figma file. The only requirement was to implement the feature list described in the next section. Otherwise, the tech stack, architecture, front-end only vs full-stack app came down to personal preference. The [live site can be viewed by following this link](https://www.product-feedback-app.com).
 
 ## Feature list
 
