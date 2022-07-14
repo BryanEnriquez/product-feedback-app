@@ -10,6 +10,7 @@ module.exports = helmet({
       'img-src': [
         "'self'",
         'blob:',
+        'data:',
         'https://product-feedback-app.s3.amazonaws.com',
       ],
       'connect-src': [
