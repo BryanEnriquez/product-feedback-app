@@ -31,6 +31,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const whitelist = [
   'https://www.product-feedback-app.com',
+  'https://product-feedback-webapp.herokuapp.com',
   process.env.EDGE_URL,
 ];
 

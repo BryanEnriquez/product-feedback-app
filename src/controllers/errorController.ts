@@ -71,7 +71,9 @@ const sendResponse = (
   message = 'Internal server error'
 ) => res.status(code).json({ status, message });
 
-const sendErrorProd: ErrorHandler = (err, _, res) => {
+const sendErrorProd: ErrorHandler = (err, req, res) => {
+  console.log('query params: ', req.query);
+
   if (err instanceof AppError)
     return sendResponse(res, err.statusCode, err.status, err.message);
 
