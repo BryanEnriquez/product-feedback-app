@@ -46,12 +46,6 @@ const getCookieOptions = (req: Request): CookieOptions => ({
   httpOnly: true,
   secure: NODE_ENV !== 'dev',
   sameSite: SAME_SITE,
-  ...(NODE_ENV === 'production' && {
-    domain:
-      req.headers.host === HEROKUAPP_HOST
-        ? HEROKUAPP_HOST
-        : '.product-feedback-app.com',
-  }),
 });
 
 const createSendToken = async (
