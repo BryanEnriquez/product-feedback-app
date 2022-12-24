@@ -1,0 +1,30 @@
+@import '../../styles/variables';
+
+@keyframes shine {
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.loader {
+  background: linear-gradient(
+      -80deg,
+      rgba(255, 255, 255, 0) 45%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 55%
+    ),
+    rgb(216, 216, 216);
+  background-repeat: repeat-y;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  animation: shine 2s infinite;
+  border-radius: 10px;
+
+  &--a {
+    height: 150px;
+
+    @media (min-width: $media-m) {
+      height: 200px;
+    }
+  }
+}

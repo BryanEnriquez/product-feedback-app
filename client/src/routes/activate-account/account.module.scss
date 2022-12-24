@@ -1,0 +1,75 @@
+@import '../../styles/variables';
+
+.acc {
+  margin: 34px auto 77px auto;
+  padding: 0 24px;
+  max-width: 54.8rem;
+
+  &__backLink {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 55px;
+  }
+
+  &__content {
+    padding: 44px 24px;
+    background-color: $color-white;
+    border-radius: 10px;
+
+    > h1 {
+      margin-bottom: 48px;
+      font-weight: 700;
+      font-size: 2rem;
+      line-height: 2.9rem;
+      text-align: center;
+      letter-spacing: 0.18px;
+      color: $color-blue-dark;
+    }
+
+    > p {
+      font-weight: 500;
+      margin-top: 4px;
+      font-size: 1.4rem;
+      line-height: 2rem;
+      color: $color-blue-grey;
+    }
+
+    > a {
+      margin: 16px auto 0 auto;
+      max-width: 16rem;
+    }
+  }
+}
+
+@media (min-width: $media-m) {
+  .acc {
+    margin: 56px auto 122px auto;
+    padding: 0;
+    max-width: 54rem;
+
+    &__backLink {
+      margin-bottom: 68px;
+    }
+
+    &__content {
+      padding: 52px 42px;
+
+      > h1 {
+        margin-bottom: 54px;
+        font-size: 2.4rem;
+        line-height: 3.5rem;
+        letter-spacing: 0.33px;
+      }
+
+      > p {
+        margin-top: 6px;
+        font-size: 1.5rem;
+        line-height: 2.2rem;
+      }
+
+      > a {
+        margin-top: 20px;
+      }
+    }
+  }
+}

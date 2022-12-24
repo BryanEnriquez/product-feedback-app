@@ -1,0 +1,160 @@
+@import '../../styles/variables';
+
+.settings {
+  padding-bottom: 90px;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+  gap: 20px;
+
+  &__nav {
+    padding: 26px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $color-white;
+    background-color: $color-blue-darkest;
+
+    > h1 {
+      font-size: 1.8rem;
+      line-height: 2.6rem;
+      letter-spacing: 0.25px;
+    }
+  }
+
+  &__main {
+    margin: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    background-color: $color-white;
+    border-radius: 10px;
+  }
+
+  &__tabs {
+    height: 100%;
+    display: flex;
+    overflow-x: auto;
+    background-color: $color-white-2;
+
+    > li {
+      min-width: fit-content;
+      flex-grow: 1;
+
+      &:not(:last-of-type) {
+        margin-right: 1px;
+      }
+    }
+  }
+
+  &__btn {
+    display: block;
+    padding: 4px 16px;
+    width: 100%;
+    min-height: calc(40px + 1rem);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1.3rem;
+    line-height: 1.9rem;
+    letter-spacing: 0.18px;
+    color: $color-white;
+    background-color: $color-blue-darkest;
+    border: none;
+    border-radius: 10px 10px 0 0;
+
+    &--active {
+      color: $color-blue-dark;
+      background-color: $color-white;
+    }
+  }
+
+  &__formWrapper {
+    padding: 12px 24px 24px 24px;
+  }
+}
+
+@media (min-width: $media-m) {
+  .settings {
+    gap: 32px;
+    padding: 56px 0 95px 0;
+
+    &__nav {
+      padding: 27px 32px;
+      border-radius: 10px;
+
+      > h1 {
+        font-size: 2.4rem;
+        line-height: 3.5rem;
+        letter-spacing: 0.33px;
+      }
+    }
+
+    &__main {
+      margin: 0;
+      gap: 12px;
+    }
+
+    &__btn {
+      font-size: 1.5rem;
+      line-height: 2.2rem;
+      letter-spacing: 0.25px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &__formWrapper {
+      padding: 24px 42px 40px 42px;
+    }
+  }
+}
+
+@media (min-width: $media-l) {
+  .settings {
+    gap: 48px;
+    padding: 78px 0 180px 0;
+
+    &__main {
+      min-height: 50rem;
+      grid-template-columns: 220px 1fr;
+      grid-template-rows: auto;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    &__tabs {
+      flex-direction: column;
+      overflow: hidden auto;
+      background-color: $color-white;
+
+      &::after {
+        display: block;
+        background-color: $color-blue-darkest;
+        height: 100%;
+        content: '';
+      }
+
+      > li {
+        min-width: auto;
+        flex-grow: 0;
+
+        &:not(:last-of-type) {
+          margin: 0;
+        }
+      }
+    }
+
+    &__btn {
+      padding: 12px 32px;
+      min-height: calc(40px + 1.5rem);
+      text-align: left;
+      border-radius: 0;
+    }
+
+    &__formWrapper {
+      padding: 40px 64px 40px 64px;
+    }
+  }
+}

@@ -1,0 +1,87 @@
+@import '../../styles/variables';
+
+.formWrapper {
+  margin: 34px 0 77px 0;
+  padding: 0 24px;
+  color: $color-blue-dark;
+
+  &__backLink {
+    display: flex;
+    justify-content: left;
+  }
+
+  &__main {
+    position: relative;
+    margin-top: 55px;
+    padding: 44px 24px 24px 24px;
+    background-color: $color-white;
+    border-radius: 10px;
+
+    > i {
+      position: absolute;
+      display: block;
+      top: -20px;
+      left: 24px;
+      width: 40px;
+      height: 40px;
+      background-size: cover;
+    }
+
+    > h1 {
+      font-size: 1.8rem;
+      line-height: 2.6rem;
+      letter-spacing: 0.25px;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.icon--create {
+  background-image: url('/images/icon-new-feedback.svg');
+}
+
+.icon--edit {
+  background-image: url('/images/icon-edit-feedback.svg');
+}
+
+.icon--signup {
+  background-image: url('/images/icon-signup.svg');
+}
+
+@media (min-width: $media-m) {
+  .formWrapper {
+    margin: 56px auto 122px;
+    max-width: 54rem;
+    padding: 0;
+
+    &__backLink {
+      display: flex;
+      justify-content: left;
+    }
+
+    &__main {
+      margin-top: 68px;
+      padding: 52px 42px 40px 42px;
+
+      > i {
+        left: 42px;
+        top: -28px;
+        width: 56px;
+        height: 56px;
+      }
+
+      > h1 {
+        font-size: 2.4rem;
+        line-height: 3.5rem;
+        letter-spacing: 0.33px;
+        margin-bottom: 40px;
+      }
+    }
+  }
+}
+
+@media (min-width: $media-l) {
+  .formWrapper {
+    margin: 92px auto 129px;
+  }
+}

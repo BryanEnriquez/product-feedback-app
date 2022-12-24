@@ -1,0 +1,226 @@
+@import '../../styles/variables';
+
+.dd {
+  position: relative;
+  color: #f2f4fe;
+  font-size: 1.3rem;
+  line-height: 1.9rem;
+
+  &__box {
+    display: flex;
+
+    &--a {
+      align-items: center;
+      transition: opacity 0.2s;
+    }
+
+    &--b {
+      flex-direction: column;
+      color: $color-blue-dark;
+    }
+
+    &.dd__box--disabled {
+      opacity: 0.5;
+    }
+  }
+
+  &__label {
+    font-weight: 400;
+
+    &--a {
+      letter-spacing: 0.2px;
+    }
+
+    &--b {
+      margin-bottom: 3px;
+      font-weight: 700;
+      letter-spacing: 0.18px;
+    }
+  }
+
+  &__desc {
+    margin-bottom: 16px;
+    color: $color-blue-grey;
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    border: 0;
+    color: inherit;
+
+    > svg {
+      display: inline-block;
+      pointer-events: none;
+      margin-top: 2px;
+      margin-left: 9px;
+      width: 1rem;
+      height: 0.7rem;
+    }
+
+    &--a {
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      background-color: inherit;
+
+      > svg > path {
+        stroke: $color-white;
+      }
+    }
+
+    &--b {
+      outline: none;
+      padding: 13px 15px 14px 15px;
+      background-color: $color-white-2;
+      border: 1px solid transparent;
+      border-radius: 5px;
+
+      &:focus {
+        border: 1px solid $color-blue;
+      }
+    }
+  }
+
+  &__listWrapper {
+    display: none;
+    position: absolute;
+
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: $color-white;
+    box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.35);
+    z-index: 5;
+
+    &--a {
+      width: 20rem;
+      top: calc(100% + 20px);
+    }
+
+    &--b {
+      width: 100%;
+      top: calc(100% + 16px);
+    }
+
+    &--open {
+      display: block;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 1px;
+    max-height: 22.4rem;
+    overflow: auto;
+    background-color: rgba(58, 67, 116, 0.15);
+
+    > li {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      font-weight: 400;
+      font-size: 1.4rem;
+      line-height: 2rem;
+      color: $color-blue-grey;
+      background-color: $color-white;
+      transition: color 0.2s;
+
+      &.active::after {
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        width: 1.1rem;
+        height: calc(1.1rem * 0.846);
+        transform: translateY(-50%);
+        content: '';
+        background-image: url('/images/icon-check.svg');
+        background-size: cover;
+      }
+    }
+  }
+}
+
+@media (min-width: $media-m) {
+  .dd {
+    // Sort dropdown
+    &--a {
+      font-size: 1.4rem;
+      line-height: 2rem;
+    }
+
+    // Form dropdown
+    &--b {
+      font-size: 1.5rem;
+      line-height: 2.2rem;
+    }
+
+    &__box {
+      &--a {
+        &:hover {
+          cursor: pointer;
+          opacity: 0.75;
+        }
+      }
+    }
+
+    &__label {
+      &--b {
+        margin-bottom: 2px;
+        font-size: 1.4rem;
+        line-height: 2rem;
+        letter-spacing: 0.19px;
+      }
+    }
+
+    &__desc {
+      font-size: 1.4rem;
+      line-height: 2rem;
+    }
+
+    &__btn {
+      &--b {
+        padding: 12px 23px 12px 23px;
+      }
+    }
+
+    &__listWrapper {
+      &--a {
+        width: 25.5rem;
+        top: calc(100% + 42px);
+      }
+    }
+
+    &__list {
+      &--a > li {
+        font-size: 1.6rem;
+        line-height: 2.3rem;
+      }
+
+      &--b > li {
+        font-size: 1.6rem;
+        line-height: 2.3rem;
+      }
+
+      > li {
+        padding: 12px 24px;
+
+        &:hover {
+          cursor: pointer;
+          color: $color-violet;
+        }
+
+        &.active::after {
+          right: 24px;
+          width: 1.2rem;
+          height: calc(1.2rem * 0.846);
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,12 @@
 node_modules
 
-config/aws/cloudfront.js
+dist
 
-dev-data/testDataPWs.json
+src/config/aws/cloudfront.js
 
 dev-data/user-images
+
+dev-data/testDataPWs.json
 
 # local configuration
 config.env

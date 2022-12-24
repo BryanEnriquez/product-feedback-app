@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.page {
+  margin-bottom: 98px;
+
+  @media (min-width: $media-m) {
+    margin: 56px 0 95px 0;
+  }
+
+  @media (min-width: $media-l) {
+    margin: 78px 0 179px 0;
+  }
+}

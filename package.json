@@ -3,16 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "main": "server.js",
   "engines": {
-    "node": "16.13.x"
+    "node": "16.17.x"
   },
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "prod:local": "SET NODE_ENV=production&& nodemon server.js",
-    "build": "npm install --prefix client && npm run build --prefix client",
-    "debug": "ndb server.js"
+    "start": "node dist/src/server.js",
+    "dev": "nodemon src/server.ts",
+    "sync": "ts-node --transpileOnly src/database/syncModels.ts",
+    "build:server": "tsc",
+    "build": "npm install --prefix client && npm run build --prefix client && tsc"
   },
   "repository": {
     "type": "git",
@@ -32,20 +31,42 @@
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dompurify": "^2.3.6",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
-    "express-rate-limit": "^6.3.0",
-    "helmet": "^5.1.0",
-    "html-to-text": "^8.2.0",
-    "jsdom": "^19.0.0",
-    "jsonwebtoken": "^8.5.1",
+    "dompurify": "^2.4.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.6.0",
+    "helmet": "^6.0.0",
+    "html-to-text": "^8.2.1",
+    "isomorphic-dompurify": "^0.23.0",
+    "jsdom": "^20.0.1",
+    "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
-    "nodemailer": "^6.7.3",
-    "pg": "^8.7.3",
+    "nodemailer": "^6.8.0",
+    "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
     "pug": "^3.0.2",
-    "sequelize": "^6.18.0",
-    "slugify": "^1.6.5"
+    "qs": "^6.11.0",
+    "sequelize": "^6.25.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/compression": "^1.7.2",
+    "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.12",
+    "@types/dompurify": "^2.3.4",
+    "@types/express": "^4.17.14",
+    "@types/html-to-text": "^8.1.1",
+    "@types/http-errors": "^2.0.1",
+    "@types/jsdom": "^20.0.0",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/morgan": "^1.9.3",
+    "@types/node": "^18.11.5",
+    "@types/nodemailer": "^6.4.6",
+    "@types/pg": "^8.6.5",
+    "@types/pug": "^2.0.6",
+    "@types/qs": "^6.9.7",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
   }
 }

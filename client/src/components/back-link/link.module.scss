@@ -1,0 +1,40 @@
+@import '../../styles/variables';
+
+.backLink {
+  display: flex;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.9rem;
+  background-color: transparent;
+
+  &--blue {
+    color: $color-blue-grey;
+  }
+
+  &--white {
+    color: $color-white;
+
+    & > svg > path {
+      stroke: $color-white;
+    }
+  }
+
+  > svg {
+    pointer-events: none;
+    margin-right: 13px;
+    height: 1rem;
+    width: 0.7rem;
+  }
+}
+
+@media (min-width: $media-m) {
+  .backLink {
+    font-size: 1.4rem;
+    line-height: 2rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

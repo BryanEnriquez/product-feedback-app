@@ -1,0 +1,23 @@
+@import '../../styles/variables';
+
+.home {
+  margin-top: 7.2rem;
+  padding-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+
+  @media (min-width: $media-m) {
+    margin-top: 56px;
+    grid-template-rows: repeat(3, auto);
+    align-items: start;
+  }
+
+  @media (min-width: $media-l) {
+    margin-top: 94px;
+    padding-bottom: 160px;
+    grid-template-columns: 25.5rem 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 24px 30px;
+  }
+}

@@ -1,0 +1,84 @@
+@import '../../styles/variables';
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, auto);
+  padding: 24px;
+  background-color: $color-white;
+  border-radius: 10px;
+
+  > label {
+    justify-self: start;
+    padding: 0 0 4px 2px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 2.6rem;
+    letter-spacing: 0.25px;
+  }
+
+  &__err {
+    margin: 1px 0 1px 0;
+    min-height: 1.9rem;
+    font-size: 1.3rem;
+    color: $color-red;
+    padding-left: 2px;
+  }
+
+  > textarea {
+    padding: 16px;
+    min-height: 80px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 1.3rem;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: $color-blue-dark;
+    background-color: $color-white-2;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border: 1px solid $color-blue;
+    }
+  }
+
+  &__fb {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto;
+    gap: 10px;
+    align-items: center;
+    justify-items: start;
+
+    > span {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: $color-blue-grey;
+      padding-left: 2px;
+    }
+  }
+}
+
+@media (min-width: $media-m) {
+  .form {
+    padding: 24px 32px 32px 32px;
+
+    &__err {
+      font-size: 1.5rem;
+      min-height: 2.2rem;
+    }
+
+    > textarea {
+      font-size: 1.5rem;
+      padding: 16px 24px;
+    }
+
+    &__fb {
+      > span {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

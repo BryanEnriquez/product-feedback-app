@@ -1,0 +1,34 @@
+@import '../../styles/variables';
+
+.slWrapper {
+  padding: 32px 24px 55px 24px;
+
+  > button {
+    margin: 0 auto;
+  }
+}
+
+.sl {
+  > *:not(:last-of-type) {
+    margin-bottom: 16px;
+  }
+}
+
+@media (min-width: $media-m) {
+  .slWrapper {
+    padding: 0 0 24px 0;
+  }
+}
+
+@media (min-width: $media-l) {
+  .sl-wrapper {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+  }
+
+  .sl {
+    > *:not(:last-of-type) {
+      margin-bottom: 20px;
+    }
+  }
+}

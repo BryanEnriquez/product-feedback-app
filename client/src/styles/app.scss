@@ -1,0 +1,66 @@
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''), url('/fonts/jost-400.woff2') format('woff2'),
+    url('/fonts/jost-400.woff') format('woff'),
+    url('/fonts/jost-400.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 500;
+  src: local(''), url('/fonts/jost-500.woff2') format('woff2'),
+    url('/fonts/jost-500.woff') format('woff'),
+    url('/fonts/jost-500.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 600;
+  src: local(''), url('/fonts/jost-600.woff2') format('woff2'),
+    url('/fonts/jost-600.woff') format('woff'),
+    url('/fonts/jost-600.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Jost';
+  font-style: normal;
+  font-weight: 700;
+  src: local(''), url('/fonts/jost-700.woff2') format('woff2'),
+    url('/fonts/jost-700.woff') format('woff'),
+    url('/fonts/jost-700.ttf') format('truetype');
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  box-sizing: border-box;
+  background-color: #f7f8fd;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+}

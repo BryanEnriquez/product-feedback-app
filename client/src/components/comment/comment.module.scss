@@ -1,0 +1,228 @@
+@import '../../styles/variables';
+
+@mixin comment-line($top: 0, $height: 100%, $display: block) {
+  position: absolute;
+  display: $display;
+  top: $top;
+  left: 0;
+  content: '';
+  width: 1px;
+  height: $height;
+  background-color: rgba(100, 113, 150, 0.1);
+}
+
+@mixin parent-line($top: 0, $height: 100%, $mobile-display: none) {
+  @include comment-line($top, $height, $mobile-display);
+}
+
+@mixin parent-line-tablet() {
+  display: block;
+  left: 20px;
+}
+
+.comment {
+  position: relative;
+  overflow: hidden;
+
+  &--parent {
+    > .form::before {
+      @include parent-line();
+    }
+
+    > .comment__content {
+      overflow: hidden;
+
+      &::before {
+        @include parent-line(63px);
+      }
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 20;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto;
+    align-items: center;
+    justify-items: start;
+    background-color: $color-white;
+
+    > img {
+      margin-right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
+
+  &__user {
+    > h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.18px;
+      color: $color-blue-dark;
+    }
+
+    > span {
+      display: block;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: $color-blue-grey;
+    }
+  }
+
+  &__replyBtn {
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: inherit;
+    color: $color-blue;
+    background-color: inherit;
+    border: 0;
+  }
+
+  &__copy {
+    position: relative;
+    padding-top: 16px;
+    font-size: 1.3rem;
+    font-weight: 400;
+    background-color: $color-white;
+    color: $color-blue-grey;
+
+    &--0 {
+      padding-bottom: 24px;
+    }
+
+    > p > span {
+      display: inline-block;
+      color: $color-violet;
+      font-weight: 700;
+      padding-right: 2px;
+    }
+  }
+
+  &__replies {
+    margin-bottom: 24px;
+  }
+
+  &--child {
+    padding-left: 24px;
+  }
+
+  &__replies > &--child {
+    &:not(:first-of-type) {
+      padding-top: 24px;
+    }
+
+    &:not(:last-of-type)::before {
+      @include comment-line();
+    }
+
+    &:last-of-type::before {
+      @include comment-line($height: 44px);
+    }
+  }
+}
+
+@media (min-width: $media-m) {
+  .comment {
+    &--parent {
+      > .form::before {
+        @include parent-line-tablet();
+      }
+
+      > .comment__content {
+        &::before {
+          @include parent-line-tablet();
+        }
+      }
+    }
+
+    &__grid {
+      > img {
+        margin-right: 32px;
+      }
+    }
+
+    &__user {
+      > h2 {
+        font-size: 1.4rem;
+        line-height: 2rem;
+        letter-spacing: 0.19px;
+      }
+
+      > span {
+        font-size: 1.4rem;
+        line-height: 2rem;
+      }
+    }
+
+    &__replyBtn {
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+
+    &__copy {
+      margin-left: 72px;
+      padding-top: 17px;
+      font-size: 1.5rem;
+      line-height: 2.2rem;
+
+      &--1 {
+        padding-top: 10px;
+      }
+
+      > p > span {
+        padding-right: 4px;
+      }
+    }
+
+    &--child {
+      padding-left: 45px;
+    }
+
+    &__replies > &--child {
+      &:first-of-type {
+        padding-top: 8px;
+      }
+
+      &:not(:first-of-type) {
+        padding-top: 17px;
+      }
+
+      &:not(:last-of-type)::before {
+        left: 20px;
+      }
+
+      &:last-of-type::before {
+        height: 37px;
+        left: 20px;
+      }
+    }
+  }
+}
+
+@media (min-width: $media-l) {
+  .comment {
+    &__copy {
+      &--1 {
+        padding-top: 17px;
+      }
+    }
+
+    &__replies > &--child {
+      &:not(:first-of-type) {
+        padding-top: 32px;
+      }
+
+      &:last-of-type::before {
+        height: 52px;
+      }
+    }
+  }
+}
