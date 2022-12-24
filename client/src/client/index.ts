@@ -32,6 +32,10 @@ const wait = (s: number) =>
     }, s * 1000)
   );
 
+const HOST = window.location.host;
+const DOMAIN = import.meta.env.VITE_DOMAIN;
+const HEROKU_DOMAIN = import.meta.env.VITE_HEROKU_DOMAIN;
+
 /**
  *
  * @param path string to append to: `apiUrl/api/v1/`, or an absolute url passed as: `{ url: '...' }`
@@ -43,10 +47,20 @@ export const client = async <T = unknown>(
 ) => {
   if (!options) options = {};
 
-  const url =
-    typeof path === 'string'
-      ? `${import.meta.env.VITE_API_URL}/${path}`
-      : path.url;
+  let url: string;
+
+  if (typeof path === 'string') {
+    switch (HOST) {
+      case DOMAIN:
+        url = `https://${import.meta.env.VITE_API_URL}/api/v1/${path}`;
+        break;
+      case HEROKU_DOMAIN:
+        url = `https://${HOST}/api/v1/${path}`;
+        break;
+      default:
+        url = `/api/v1/${path}`;
+    }
+  } else url = path.url;
 
   try {
     const apiPromise = fetch(url, {
